@@ -2,6 +2,10 @@ package model;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
+/**
+ * A representation of an exercise prompt.
+ */
+
 public class Exercise {
     private String type;
     private String description;
@@ -14,6 +18,11 @@ public class Exercise {
         this.description = exerciseDescription;
         this.isComplete = false;
     }
+    // MODIFIES: this
+    // EFFECTS: changes the isComplete field to true and invokes the
+    public void markExerciseComplete() {
+        this.isComplete = true;
+    }
 
     // EFFECTS: returns exercise type of the current exercise
     public String getType() {
@@ -24,6 +33,12 @@ public class Exercise {
     public String getDescription() {
         return this.description;
     }
+
+    // EFFECTS: returns completion status of the current exercise
+    public Boolean getCompletionStatus() {
+        return this.isComplete;
+    }
 }
+
 
 
