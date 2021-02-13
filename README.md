@@ -7,9 +7,9 @@ way. The user will be able to customize their experience by selecting a mindfuln
 prompted with a relevant mindfulness exercise to complete. 
 
 There will be **4 categories** of exercises:
+- Act
 - Breathe
 - Notice
-- Act
 - Relax
 
 In addition, the user can add their own exercises so they can tailor
