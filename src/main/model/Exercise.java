@@ -6,7 +6,8 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
  * A representation of an exercise prompt.
  */
 
-public class Exercise {
+public abstract class Exercise {
+    // fields to represent changing properties of an Exercise
     private String type;
     private String description;
     private Boolean isComplete;
@@ -18,11 +19,9 @@ public class Exercise {
         this.description = exerciseDescription;
         this.isComplete = false;
     }
-    // MODIFIES: this
-    // EFFECTS: changes the isComplete field to true and invokes the
-    public void markExerciseComplete() {
-        this.isComplete = true;
-    }
+
+    // EFFECTS: returns congratulatory message to the user for completing an exercise
+    protected abstract String congratulateUser();
 
     // EFFECTS: returns exercise type of the current exercise
     public String getType() {
@@ -37,6 +36,12 @@ public class Exercise {
     // EFFECTS: returns completion status of the current exercise
     public Boolean getCompletionStatus() {
         return this.isComplete;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: changes the isComplete field to true
+    public void markExerciseComplete() {
+        this.isComplete = true;
     }
 }
 
