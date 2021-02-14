@@ -79,8 +79,8 @@ public class MindfulnessApp {
         String type = selectExerciseType();
 
         System.out.print("\nEnter short description of the " + type + " exercise to add: \n");
-        String exerciseDescription = input.next();
-        exerciseDescription = exerciseDescription.replaceAll("\\s","");
+        String exerciseDescription = input.nextLine();
+        exerciseDescription = input.nextLine(); //if this is not here the input prompt will be skipped
 
         exerciseList.addExercise(exerciseDescription, type);
         System.out.println("\nExercise successfully added!");
@@ -176,7 +176,7 @@ public class MindfulnessApp {
         }
     }
 
-    // EFFECTS: prints a string of the completed exercise type:description pairs
+    // EFFECTS: prints a list of the completed exercise type:description pairs
     public void printExercises() {
         System.out.println("\nBelow is a list of completed exercises so far:");
         System.out.println(exerciseList.getCompletedExercisesAsString());
