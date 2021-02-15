@@ -34,7 +34,7 @@ habits.
 
 ### User Stories
 - As a user, I want to be able to select a mindfulness category to be prompted with an exercise to complete
-- As a user, I want to be able to mark an exercise as complete in order to be presented with the next level of exercise
+- As a user, I want to be able to mark an exercise as complete, so I can move on to the next level of exercise
 - As a user, I want to be able to add my own custom exercises, so I can tailor my unique mindfulness journey 
 [many Xs to a Y]
-- As a user, I want to be able to view the number of exercises I have completed to track my progress
+- As a user, I want to be able to view the exercises I have completed to track my progress
