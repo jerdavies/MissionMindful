@@ -57,13 +57,13 @@ public class MindfulnessApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes mindful exercise list
+    // EFFECTS: initializes mindful exercise list and the input scanner
     private void init() {
         exerciseList = new ExerciseList();
         input = new Scanner(System.in);
     }
 
-    // EFFECTS: displays menu of options to user
+    // EFFECTS: displays main menu of options to user
     private void displayMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\tc -> Choose a mindfulness exercise");
@@ -155,6 +155,8 @@ public class MindfulnessApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: prompts and allows user if they want to mark an exercise as complete
     private void markExerciseComplete(Exercise exercise) {
         System.out.println("\nWhen you are ready, you can mark the exercise as complete:");
         String selection = "";

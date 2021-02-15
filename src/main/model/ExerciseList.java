@@ -77,7 +77,7 @@ public class ExerciseList {
     }
 
     // REQUIRES: exerciseType is one of: DEFAULT_EX_TYPE_1, DEFAULT_EX_TYPE_2, DEFAULT_EX_TYPE_3, DEFAULT_EX_TYPE_4
-    // EFFECTS: returns the first non-completed exercise of the specified type
+    // EFFECTS: returns the first non-completed exercise of the specified type or null object if no more to do
     public Exercise getNextExercise(String type) {
         for (Exercise e: this.exerciseList) {
             if (!(e.getCompletionStatus()) && e.getType().equals(type)) {
@@ -87,7 +87,7 @@ public class ExerciseList {
         return null;
     }
 
-    // EFFECTS: returns a string of the completed exercise type:description pairs
+    // EFFECTS: returns a (list-resembling) string of the completed exercise type:description pairs
     public String getCompletedExercisesAsString() {
         String exerciseStr = "";
         String emptyNotification = "No mindfulness exercises completed yet";
@@ -102,12 +102,6 @@ public class ExerciseList {
             exerciseStr = emptyNotification;
         }
         return exerciseStr;
-    }
-
-    // EFFECTS: Returns true if Exercise e is in the ExerciseList
-    // and false otherwise
-    public boolean contains(Exercise e) {
-        return this.exerciseList.contains(e);
     }
 
     // EFFECTS: Returns the number of exercises in the ExerciseSet
