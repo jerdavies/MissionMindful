@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -21,32 +20,27 @@ public class ExerciseList {
     public static final String DEFAULT_EX_TYPE_3 = "Notice";
     public static final String DEFAULT_EX_TYPE_4 = "Relax";
 
-    private static final String DEFAULT_EXERCISE_1 = "Write down 3 things you appreciate from today";
-    private static final String DEFAULT_EXERCISE_2 = "Get some exercise, without your phone, and focus on the"
+    public static final String DEFAULT_EXERCISE_1 = "Write down 3 things you appreciate from today";
+    public static final String DEFAULT_EXERCISE_2 = "Get some exercise, without your phone, and focus on the"
             + " physical sensations";
-    private static final String DEFAULT_EXERCISE_3 = "De-clutter part of your house or office desk, helping the mind"
+    public static final String DEFAULT_EXERCISE_3 = "De-clutter part of your house or office desk, helping the mind"
             + " to feel calmer and clearer";
-    private static final String DEFAULT_EXERCISE_4 = "Take 20 deep breaths; inhale through nose, exhale with mouth";
-    private static final String DEFAULT_EXERCISE_5 = "Every time your phone vibrates today, pause and take one breath";
-    private static final String DEFAULT_EXERCISE_6 = "Follow along with a guided meditation on Youtube";
-    private static final String DEFAULT_EXERCISE_7 = "Walk for 10 minutes today, without your phone,"
+    public static final String DEFAULT_EXERCISE_4 = "Take 20 deep breaths; inhale through nose, exhale with mouth";
+    public static final String DEFAULT_EXERCISE_5 = "Every time your phone vibrates today, pause and take one breath";
+    public static final String DEFAULT_EXERCISE_6 = "Follow along with a guided meditation on Youtube";
+    public static final String DEFAULT_EXERCISE_7 = "Walk for 10 minutes today, without your phone,"
             + " focused on your surroundings";
-    private static final String DEFAULT_EXERCISE_8 = "Notice the sensation as you change posture today from sitting"
+    public static final String DEFAULT_EXERCISE_8 = "Notice the sensation as you change posture today from sitting"
             + " to standing or standing to sitting";
-    private static final String DEFAULT_EXERCISE_9 = "Eat one meal alone, without any distractions at all, focusing"
+    public static final String DEFAULT_EXERCISE_9 = "Eat one meal alone, without any distractions at all, focusing"
             + " just on the tastes and smells";
-    private static final String DEFAULT_EXERCISE_10 = "Listen to a favourite piece of music";
-    private static final String DEFAULT_EXERCISE_11 = "Drink a mindful cup of tea or coffee";
-    private static final String DEFAULT_EXERCISE_12 = "Pick up a good book and read it while lounging in a"
+    public static final String DEFAULT_EXERCISE_10 = "Listen to a favourite piece of music";
+    public static final String DEFAULT_EXERCISE_11 = "Drink a mindful cup of tea or coffee";
+    public static final String DEFAULT_EXERCISE_12 = "Pick up a good book and read it while lounging in a"
             + " comfortable spot";
 
     // fields to represent changing properties of an exercise list
     private List<Exercise> exerciseList;
-    private int actLevel;
-    private int breatheLevel;
-    private int noticeLevel;
-    private HashMap<String, Integer> currentCategoryLevels;
-
 
     // EFFECTS: constructs an collection of the default exercises
     public ExerciseList() {
@@ -86,7 +80,7 @@ public class ExerciseList {
     // EFFECTS: returns the first non-completed exercise of the specified type
     public Exercise getNextExercise(String type) {
         for (Exercise e: this.exerciseList) {
-            if (!(e.getCompletionStatus()) && e.getType() == type) {
+            if (!(e.getCompletionStatus()) && e.getType().equals(type)) {
                 return e;
             }
         }
@@ -110,20 +104,19 @@ public class ExerciseList {
         return exerciseStr;
     }
 
-    // MODIFIES: this
-    // EFFECTS: initializes all category levels to level 0
-    public void createCategoryLevelsTracker() {
-        this.currentCategoryLevels = new HashMap<String, Integer>();
-        currentCategoryLevels.put(DEFAULT_EX_TYPE_1, 0);
-        currentCategoryLevels.put(DEFAULT_EX_TYPE_2, 0);
-        currentCategoryLevels.put(DEFAULT_EX_TYPE_3, 0);
-        currentCategoryLevels.put(DEFAULT_EX_TYPE_4, 0);
+    // EFFECTS: Returns true if Exercise e is in the ExerciseList
+    // and false otherwise
+    public boolean contains(Exercise e) {
+        return this.exerciseList.contains(e);
     }
 
-    // REQUIRES: exerciseType is one of: DEFAULT_EX_TYPE_1, DEFAULT_EX_TYPE_2, DEFAULT_EX_TYPE_3, DEFAULT_EX_TYPE_4
-    // MODIFIES: this
-    // EFFECTS: adds one to category level of "just completed" level for the relevant exercise type
-    public void levelUp(String type) {
-        currentCategoryLevels.put(type, currentCategoryLevels.get(type) + 1);
+    // EFFECTS: Returns the number of exercises in the ExerciseSet
+    public int size() {
+        return this.exerciseList.size();
+    }
+
+    // EFFECTS: getter method for list indexing
+    public Exercise get(int i) {
+        return this.exerciseList.get(i);
     }
 }

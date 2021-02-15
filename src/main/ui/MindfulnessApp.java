@@ -168,7 +168,8 @@ public class MindfulnessApp {
 
         if (selection.equals("y")) {
             exercise.markExerciseComplete();
-            System.out.println("\nExercise marked as complete. Pat yourself on the back!");
+            String congratsMsg = exercise.congratulateUser();
+            System.out.println("\nExercise marked as complete. " + congratsMsg);
         }
 
         if (selection.equals("n")) {

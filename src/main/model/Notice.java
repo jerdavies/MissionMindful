@@ -13,7 +13,7 @@ public class Notice extends Exercise {
 
     @Override
     // EFFECTS: returns congratulatory message to the user for completing an exercise
-    protected String congratulateUser() {
+    public String congratulateUser() {
         return CONGRATS_MSG;
     }
 }

@@ -21,7 +21,7 @@ public abstract class Exercise {
     }
 
     // EFFECTS: returns congratulatory message to the user for completing an exercise
-    protected abstract String congratulateUser();
+    public abstract String congratulateUser();
 
     // EFFECTS: returns exercise type of the current exercise
     public String getType() {
