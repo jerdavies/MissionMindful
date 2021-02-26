@@ -38,3 +38,5 @@ habits.
 - As a user, I want to be able to add my own custom exercises, so I can tailor my unique mindfulness journey 
 [many Xs to a Y]
 - As a user, I want to be able to view the exercises I have completed to track my progress
+- As a user, I want to be able to save my exercise program (including progress) to file
+- As a user, I want to be able to load my exercise program (including progress) from file
