@@ -124,7 +124,6 @@ public class ExerciseList implements Writable {
     // EFFECTS: returns this as JSON object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("name", name);
         json.put("exerciseList", exerciseListToJson());
         return json;
     }

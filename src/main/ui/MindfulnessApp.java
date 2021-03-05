@@ -2,6 +2,7 @@ package ui;
 
 import model.Exercise;
 import model.ExerciseList;
+import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
@@ -22,13 +23,13 @@ public class MindfulnessApp {
     private JsonReader jsonReader;
 
     // EFFECTS: runs the mindfulness application
-    public MindfulnessApp() {
+    public MindfulnessApp() throws FileNotFoundException {
         runMissionMindful();
     }
 
     // MODIFIES: this
     // EFFECTS: processes user input
-    private void runMissionMindful() {
+    private void runMissionMindful() throws FileNotFoundException {
         boolean keepGoing = true;
         String command = null;
 
@@ -51,7 +52,7 @@ public class MindfulnessApp {
 
     // MODIFIES: this
     // EFFECTS: initializes mindful exercise list, input scanner, and json read/writer
-    private void init() {
+    private void init() throws FileNotFoundException {
         exerciseList = new ExerciseList();
         input = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -64,8 +65,8 @@ public class MindfulnessApp {
         System.out.println("\tc -> Choose a mindfulness exercise");
         System.out.println("\tv -> View completed exercises");
         System.out.println("\ta -> Add my own exercise");
-        System.out.println("\ts -> save mindfulness program to file");
-        System.out.println("\tl -> load mindfulness program from file");
+        System.out.println("\ts -> Save mindfulness program to file");
+        System.out.println("\tl -> Load mindfulness program from file");
         System.out.println("\te -> Exit");
     }
 
@@ -78,6 +79,10 @@ public class MindfulnessApp {
             printExercises();
         } else if (command.equals("a")) {
             addExercise();
+        } else if (command.equals("s")) {
+            saveExerciseList();
+        } else if (command.equals("l")) {
+            loadExerciseList();
         } else {
             System.out.println("Selection not valid...");
         }

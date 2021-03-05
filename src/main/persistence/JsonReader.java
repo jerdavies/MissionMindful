@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 import org.json.*;
 
-// Represents a reader that reads workroom from JSON data stored in file
+// Represents a reader that reads ExerciseList from JSON data stored in file
 // Citation: Code taken and modified from JsonReader.java package in JsonSerializationDemo
 public class JsonReader {
     private String source;
@@ -32,7 +32,7 @@ public class JsonReader {
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
-        try (Stream<String> stream = Files.lines( Paths.get(source), StandardCharsets.UTF_8)) {
+        try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
             stream.forEach(s -> contentBuilder.append(s));
         }
 
@@ -41,7 +41,6 @@ public class JsonReader {
 
     // EFFECTS: parses ExerciseList from JSON object and returns it
     private ExerciseList parseExerciseList(JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
         ExerciseList el = new ExerciseList();
         addExercises(el, jsonObject);
         return el;
@@ -50,19 +49,20 @@ public class JsonReader {
     // MODIFIES: el
     // EFFECTS: parses exercises from JSON object and adds them to exerciseList
     private void addExercises(ExerciseList el, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("thingies");   ****
+        JSONArray jsonArray = jsonObject.getJSONArray("exerciseList");
         for (Object json : jsonArray) {
-            JSONObject nextThingy = (JSONObject) json;
-            addExercise(el, nextThingy);
+            JSONObject nextExercise = (JSONObject) json;
+            addExercise(el, nextExercise);
         }
     }
 
     // MODIFIES: el
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // EFFECTS: parses exercise from JSON object and adds it to exerciseList
     private void addExercise(ExerciseList el, JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
-        Category category = Category.valueOf(jsonObject.getString("category"));
-        Thingy thingy = new Thingy(name, category);
-        wr.addThingy(thingy);
+        String description = jsonObject.getString("description");
+        String type = jsonObject.getString("type");
+        Boolean isComplete = jsonObject.getBoolean("isComplete");
+
+        el.addExercise(description, type);  //!!!!
     }
 }

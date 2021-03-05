@@ -1,0 +1,67 @@
+{"exerciseList": [
+    {
+        "description": "Write down 3 things you appreciate from today",
+        "type": "Act",
+        "isComplete": false
+    },
+    {
+        "description": "Get some exercise, without your phone, and focus on the physical sensations",
+        "type": "Act",
+        "isComplete": false
+    },
+    {
+        "description": "De-clutter part of your house or office desk, helping the mind to feel calmer and clearer",
+        "type": "Act",
+        "isComplete": false
+    },
+    {
+        "description": "Take 20 deep breaths; inhale through nose, exhale with mouth",
+        "type": "Breathe",
+        "isComplete": false
+    },
+    {
+        "description": "Every time your phone vibrates today, pause and take one breath",
+        "type": "Breathe",
+        "isComplete": false
+    },
+    {
+        "description": "Follow along with a guided meditation on Youtube",
+        "type": "Breathe",
+        "isComplete": false
+    },
+    {
+        "description": "Walk for 10 minutes today, without your phone, focused on your surroundings",
+        "type": "Notice",
+        "isComplete": false
+    },
+    {
+        "description": "Notice the sensation as you change posture today from sitting to standing or standing to sitting",
+        "type": "Notice",
+        "isComplete": false
+    },
+    {
+        "description": "Eat one meal alone, without any distractions at all, focusing just on the tastes and smells",
+        "type": "Notice",
+        "isComplete": false
+    },
+    {
+        "description": "Listen to a favourite piece of music",
+        "type": "Relax",
+        "isComplete": false
+    },
+    {
+        "description": "Drink a mindful cup of tea or coffee",
+        "type": "Relax",
+        "isComplete": false
+    },
+    {
+        "description": "Pick up a good book and read it while lounging in a comfortable spot",
+        "type": "Relax",
+        "isComplete": false
+    },
+    {
+        "description": "TESTTT",
+        "type": "Act",
+        "isComplete": false
+    }
+]}
