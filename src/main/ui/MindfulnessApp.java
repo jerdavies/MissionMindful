@@ -2,17 +2,24 @@ package ui;
 
 import model.Exercise;
 import model.ExerciseList;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import static model.ExerciseList.*;
 
 /**
  * User interface for the Mission Mindful app.
+ * Citation: Large portions of code taken and modified from ui package in CPSC210 TellerApp.
  */
 public class MindfulnessApp {
+    private static final String JSON_STORE = "./data/exerciseList.json";
     private ExerciseList exerciseList;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the mindfulness application
     public MindfulnessApp() {
@@ -43,6 +50,26 @@ public class MindfulnessApp {
     }
 
     // MODIFIES: this
+    // EFFECTS: initializes mindful exercise list, input scanner, and json read/writer
+    private void init() {
+        exerciseList = new ExerciseList();
+        input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+    }
+
+    // EFFECTS: displays main menu of options to user
+    private void displayMenu() {
+        System.out.println("\nSelect from:");
+        System.out.println("\tc -> Choose a mindfulness exercise");
+        System.out.println("\tv -> View completed exercises");
+        System.out.println("\ta -> Add my own exercise");
+        System.out.println("\ts -> save mindfulness program to file");
+        System.out.println("\tl -> load mindfulness program from file");
+        System.out.println("\te -> Exit");
+    }
+
+    // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
         if (command.equals("c")) {
@@ -54,22 +81,6 @@ public class MindfulnessApp {
         } else {
             System.out.println("Selection not valid...");
         }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: initializes mindful exercise list and the input scanner
-    private void init() {
-        exerciseList = new ExerciseList();
-        input = new Scanner(System.in);
-    }
-
-    // EFFECTS: displays main menu of options to user
-    private void displayMenu() {
-        System.out.println("\nSelect from:");
-        System.out.println("\tc -> Choose a mindfulness exercise");
-        System.out.println("\tv -> View completed exercises");
-        System.out.println("\ta -> Add my own exercise");
-        System.out.println("\te -> Exit");
     }
 
     // MODIFIES: this
@@ -183,5 +194,28 @@ public class MindfulnessApp {
     public void printExercises() {
         System.out.println("\nBelow is a list of completed exercises so far:");
         System.out.println(exerciseList.getCompletedExercisesAsString());
+    }
+
+    // EFFECTS: saves the exerciseList (mindfulness program) to file
+    private void saveExerciseList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(exerciseList);
+            jsonWriter.close();
+            System.out.println("Saved current mindfulness program to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads exerciseList (mindfulness program) from file
+    private void loadExerciseList() {
+        try {
+            exerciseList = jsonReader.read();
+            System.out.println("Loaded current mindfulness program from  " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }

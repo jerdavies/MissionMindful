@@ -1,5 +1,9 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +17,7 @@ import java.util.List;
  * of the selected type will then be presented on in the
  * order in which they were added to the collection of exercises
  */
-public class ExerciseList {
+public class ExerciseList implements Writable {
     // constants for the default exercises included with the game
     public static final String DEFAULT_EX_TYPE_1 = "Act";
     public static final String DEFAULT_EX_TYPE_2 = "Breathe";
@@ -41,6 +45,7 @@ public class ExerciseList {
 
     // fields to represent changing properties of an exercise list
     private List<Exercise> exerciseList;
+    private String name;
 
     // EFFECTS: constructs an collection of the default exercises
     public ExerciseList() {
@@ -112,5 +117,27 @@ public class ExerciseList {
     // EFFECTS: getter method for list indexing
     public Exercise get(int i) {
         return this.exerciseList.get(i);
+    }
+
+    @Override
+    // Citation: Code taken and modified from Workroom.java class in JsonSerializationDemo
+    // EFFECTS: returns this as JSON object
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("exerciseList", exerciseListToJson());
+        return json;
+    }
+
+    // Citation: Code taken and modified from Workroom.java class in JsonSerializationDemo
+    // EFFECTS: returns exercises in this exerciseList as a JSON array
+    private JSONArray exerciseListToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Exercise e : exerciseList) {
+            jsonArray.put(e.toJson());
+        }
+
+        return jsonArray;
     }
 }
