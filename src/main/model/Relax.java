@@ -7,8 +7,8 @@ package model;
 public class Relax extends Exercise {
     private static final String CONGRATS_MSG = "Hope you feel like a million bucks!";
 
-    public Relax(String exerciseDescription, String exerciseType) {
-        super(exerciseDescription, exerciseType);
+    public Relax(String exerciseType, String exerciseDescription, Boolean isComplete) {
+        super(exerciseType, exerciseDescription, isComplete);
     }
 
     @Override

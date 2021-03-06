@@ -18,7 +18,7 @@ class ExerciseListTest {
 
     @BeforeEach
     void runBefore() {
-        exerciseList = new ExerciseList();
+        exerciseList = new ExerciseList(false);
     }
 
     @Test
@@ -26,13 +26,13 @@ class ExerciseListTest {
         Exercise lastExercise;
         int originalSize = this.exerciseList.size();
 
-        this.exerciseList.addExercise(ACT_DESCRIPT, DEFAULT_EX_TYPE_1);
+        this.exerciseList.addExercise(DEFAULT_EX_TYPE_1, ACT_DESCRIPT, false);
         lastExercise = this.exerciseList.get(exerciseList.size() - 1);
         assertEquals(ACT_DESCRIPT,lastExercise.getDescription());
         assertEquals(originalSize + 1,exerciseList.size());
         assertFalse(lastExercise.getCompletionStatus());
 
-        this.exerciseList.addExercise(RELAX_DESCRIPT, DEFAULT_EX_TYPE_4);
+        this.exerciseList.addExercise(DEFAULT_EX_TYPE_4, RELAX_DESCRIPT, false);
         lastExercise = this.exerciseList.get(exerciseList.size() - 1);
         assertEquals(RELAX_DESCRIPT,lastExercise.getDescription());
         assertEquals(originalSize + 2,exerciseList.size());

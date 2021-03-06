@@ -41,7 +41,7 @@ public class JsonReader {
 
     // EFFECTS: parses ExerciseList from JSON object and returns it
     private ExerciseList parseExerciseList(JSONObject jsonObject) {
-        ExerciseList el = new ExerciseList();
+        ExerciseList el = new ExerciseList(true);
         addExercises(el, jsonObject);
         return el;
     }
@@ -62,7 +62,6 @@ public class JsonReader {
         String description = jsonObject.getString("description");
         String type = jsonObject.getString("type");
         Boolean isComplete = jsonObject.getBoolean("isComplete");
-
-        el.addExercise(description, type);  //!!!!
+        el.addExercise(type, description, isComplete);
     }
 }

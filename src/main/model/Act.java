@@ -7,8 +7,8 @@ package model;
 public class Act extends Exercise {
     private static final String CONGRATS_MSG = "Congrats for taking action!";
 
-    public Act(String exerciseDescription, String exerciseType) {
-        super(exerciseDescription, exerciseType);
+    public Act(String exerciseType, String exerciseDescription, Boolean isComplete) {
+        super(exerciseType, exerciseDescription, isComplete);
     }
 
     @Override

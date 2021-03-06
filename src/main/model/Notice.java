@@ -7,8 +7,8 @@ package model;
 public class Notice extends Exercise {
     private static final String CONGRATS_MSG = "Well done for dialing into the present moment!";
 
-    public Notice(String exerciseDescription, String exerciseType) {
-        super(exerciseDescription, exerciseType);
+    public Notice(String exerciseType, String exerciseDescription, Boolean isComplete) {
+        super(exerciseType, exerciseDescription, isComplete);
     }
 
     @Override

@@ -7,8 +7,8 @@ package model;
 public class Breathe extends Exercise {
     private static final String CONGRATS_MSG = "Your mind and body thank you!";
 
-    public Breathe(String exerciseDescription, String exerciseType) {
-        super(exerciseDescription, exerciseType);
+    public Breathe(String exerciseType, String exerciseDescription, Boolean isComplete) {
+        super(exerciseType, exerciseDescription, isComplete);
     }
 
     @Override

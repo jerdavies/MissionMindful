@@ -47,36 +47,45 @@ public class ExerciseList implements Writable {
     private List<Exercise> exerciseList;
     private String name;
 
-    // EFFECTS: constructs an collection of the default exercises
-    public ExerciseList() {
+    // EFFECTS: constructs a collection exercises, adding default exercises if not to be an empty list
+    public ExerciseList(Boolean toBeEmpty) {
         this.exerciseList = new ArrayList<Exercise>();
-        addExercise(DEFAULT_EXERCISE_1, DEFAULT_EX_TYPE_1);
-        addExercise(DEFAULT_EXERCISE_2, DEFAULT_EX_TYPE_1);
-        addExercise(DEFAULT_EXERCISE_3, DEFAULT_EX_TYPE_1);
-        addExercise(DEFAULT_EXERCISE_4, DEFAULT_EX_TYPE_2);
-        addExercise(DEFAULT_EXERCISE_5, DEFAULT_EX_TYPE_2);
-        addExercise(DEFAULT_EXERCISE_6, DEFAULT_EX_TYPE_2);
-        addExercise(DEFAULT_EXERCISE_7, DEFAULT_EX_TYPE_3);
-        addExercise(DEFAULT_EXERCISE_8, DEFAULT_EX_TYPE_3);
-        addExercise(DEFAULT_EXERCISE_9, DEFAULT_EX_TYPE_3);
-        addExercise(DEFAULT_EXERCISE_10, DEFAULT_EX_TYPE_4);
-        addExercise(DEFAULT_EXERCISE_11, DEFAULT_EX_TYPE_4);
-        addExercise(DEFAULT_EXERCISE_12, DEFAULT_EX_TYPE_4);
+
+        if (!(toBeEmpty)) {
+            this.addDefaultExercises();
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds default program exercises to this
+    public void addDefaultExercises() {
+        addExercise(DEFAULT_EX_TYPE_1, DEFAULT_EXERCISE_1, false);
+        addExercise(DEFAULT_EX_TYPE_1, DEFAULT_EXERCISE_2, false);
+        addExercise(DEFAULT_EX_TYPE_1, DEFAULT_EXERCISE_3, false);
+        addExercise(DEFAULT_EX_TYPE_2, DEFAULT_EXERCISE_4, false);
+        addExercise(DEFAULT_EX_TYPE_2, DEFAULT_EXERCISE_5, false);
+        addExercise(DEFAULT_EX_TYPE_2, DEFAULT_EXERCISE_6, false);
+        addExercise(DEFAULT_EX_TYPE_3, DEFAULT_EXERCISE_7, false);
+        addExercise(DEFAULT_EX_TYPE_3, DEFAULT_EXERCISE_8, false);
+        addExercise(DEFAULT_EX_TYPE_3, DEFAULT_EXERCISE_9, false);
+        addExercise(DEFAULT_EX_TYPE_4, DEFAULT_EXERCISE_10, false);
+        addExercise(DEFAULT_EX_TYPE_4, DEFAULT_EXERCISE_11, false);
+        addExercise(DEFAULT_EX_TYPE_4, DEFAULT_EXERCISE_12, false);
     }
 
     // REQUIRES: exerciseType is one of: DEFAULT_EX_TYPE_1, DEFAULT_EX_TYPE_2, DEFAULT_EX_TYPE_3, DEFAULT_EX_TYPE_4
     // MODIFIES: this
     // EFFECTS: adds a new exercise of the specified type to the collection of exercises
-    public void addExercise(String exerciseDescription, String exerciseType) {
+    public void addExercise(String exerciseType, String exerciseDescription, Boolean isComplete) {
         Exercise exercise;
         if (exerciseType.equals(DEFAULT_EX_TYPE_1)) {
-            exercise = new Act(exerciseDescription, exerciseType);
+            exercise = new Act(exerciseType, exerciseDescription, isComplete);
         } else if (exerciseType.equals(DEFAULT_EX_TYPE_2)) {
-            exercise = new Breathe(exerciseDescription, exerciseType);
+            exercise = new Breathe(exerciseType, exerciseDescription, isComplete);
         } else if (exerciseType.equals(DEFAULT_EX_TYPE_3)) {
-            exercise = new Notice(exerciseDescription, exerciseType);
+            exercise = new Notice(exerciseType, exerciseDescription, isComplete);
         } else {
-            exercise = new Relax(exerciseDescription, exerciseType);
+            exercise = new Relax(exerciseType, exerciseDescription, isComplete);
         }
         this.exerciseList.add(exercise);
     }

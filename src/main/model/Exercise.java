@@ -16,10 +16,10 @@ public abstract class Exercise implements Writable {
 
     // EFFECTS: constructs an exercise with an associated
     // exercise description and exercise type
-    public Exercise(String exerciseDescription, String exerciseType) {
+    public Exercise(String exerciseType, String exerciseDescription, Boolean isComplete) {
         this.type = exerciseType;
         this.description = exerciseDescription;
-        this.isComplete = false;
+        this.isComplete = isComplete;
     }
 
     // EFFECTS: returns congratulatory message to the user for completing an exercise

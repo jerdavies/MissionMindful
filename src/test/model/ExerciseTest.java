@@ -22,11 +22,11 @@ class ExerciseTest {
 
     @BeforeEach
     void runBefore() {
-        exerciseList = new ExerciseList();
-        act = new Act(DEFAULT_EXERCISE_1, DEFAULT_EX_TYPE_1);
-        breathe = new Breathe(DEFAULT_EXERCISE_4, DEFAULT_EX_TYPE_2);
-        notice = new Notice(DEFAULT_EXERCISE_7, DEFAULT_EX_TYPE_3);
-        relax = new Relax(DEFAULT_EXERCISE_10, DEFAULT_EX_TYPE_4);
+        exerciseList = new ExerciseList(false);
+        act = new Act(DEFAULT_EX_TYPE_1, DEFAULT_EXERCISE_1, false);
+        breathe = new Breathe(DEFAULT_EX_TYPE_2, DEFAULT_EXERCISE_4, false);
+        notice = new Notice(DEFAULT_EX_TYPE_3, DEFAULT_EXERCISE_7, false);
+        relax = new Relax(DEFAULT_EX_TYPE_4, DEFAULT_EXERCISE_10, false);
     }
 
     @Test

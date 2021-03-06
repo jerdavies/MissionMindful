@@ -2,7 +2,7 @@
     {
         "description": "Write down 3 things you appreciate from today",
         "type": "Act",
-        "isComplete": false
+        "isComplete": true
     },
     {
         "description": "Get some exercise, without your phone, and focus on the physical sensations",
@@ -57,11 +57,6 @@
     {
         "description": "Pick up a good book and read it while lounging in a comfortable spot",
         "type": "Relax",
-        "isComplete": false
-    },
-    {
-        "description": "TESTTT",
-        "type": "Act",
         "isComplete": false
     }
 ]}

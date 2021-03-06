@@ -53,7 +53,7 @@ public class MindfulnessApp {
     // MODIFIES: this
     // EFFECTS: initializes mindful exercise list, input scanner, and json read/writer
     private void init() throws FileNotFoundException {
-        exerciseList = new ExerciseList();
+        exerciseList = new ExerciseList(false);
         input = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -98,7 +98,7 @@ public class MindfulnessApp {
         String exerciseDescription = input.nextLine();
         exerciseDescription = input.nextLine(); //if this is not here the input prompt will be skipped
 
-        exerciseList.addExercise(exerciseDescription, type);
+        exerciseList.addExercise(type, exerciseDescription, false);
         System.out.println("\nExercise successfully added!");
 
         selectNextAction();
