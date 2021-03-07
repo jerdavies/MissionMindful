@@ -41,6 +41,7 @@ public class MindfulnessApp {
             command = command.toLowerCase();
 
             if (command.equals("e")) {
+                promptSave();
                 keepGoing = false;
             } else {
                 processCommand(command);
@@ -166,6 +167,27 @@ public class MindfulnessApp {
         if (selection.equals("m")) {
             return;
         } else if (selection.equals("e")) {
+            promptSave();
+        }
+    }
+
+    // EFFECTS: prompts user to save before exiting app
+    private void promptSave() {
+        System.out.println("\nDo you want to save before exiting?");
+        String selection = "";  // force entry into loop
+
+        while (!(selection.equals("y") || selection.equals("n"))) {
+            System.out.println("\ty -> " + "Yes, please save my mindfulness program");
+            System.out.println("\tn -> " + "No thanks, I'll exit now");
+            selection = input.next();
+            selection = selection.toLowerCase();
+        }
+
+        if (selection.equals("y")) {
+            saveExerciseList();
+            System.out.println("\nGoodbye!");
+            System.exit(0);
+        } else if (selection.equals("n")) {
             System.out.println("\nGoodbye!");
             System.exit(0);
         }
