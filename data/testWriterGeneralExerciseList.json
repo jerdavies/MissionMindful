@@ -1,0 +1,22 @@
+{"exerciseList": [
+    {
+        "description": "Act description",
+        "type": "Act",
+        "isComplete": true
+    },
+    {
+        "description": "Breathe description",
+        "type": "Breathe",
+        "isComplete": false
+    },
+    {
+        "description": "Notice description",
+        "type": "Notice",
+        "isComplete": true
+    },
+    {
+        "description": "Relax description",
+        "type": "Relax",
+        "isComplete": false
+    }
+]}

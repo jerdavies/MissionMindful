@@ -2,7 +2,7 @@
     {
         "description": "Write down 3 things you appreciate from today",
         "type": "Act",
-        "isComplete": false
+        "isComplete": true
     },
     {
         "description": "Get some exercise, without your phone, and focus on the physical sensations",
@@ -17,7 +17,7 @@
     {
         "description": "Take 20 deep breaths; inhale through nose, exhale with mouth",
         "type": "Breathe",
-        "isComplete": true
+        "isComplete": false
     },
     {
         "description": "Every time your phone vibrates today, pause and take one breath",
@@ -47,7 +47,7 @@
     {
         "description": "Listen to a favourite piece of music",
         "type": "Relax",
-        "isComplete": false
+        "isComplete": true
     },
     {
         "description": "Drink a mindful cup of tea or coffee",
@@ -56,6 +56,11 @@
     },
     {
         "description": "Pick up a good book and read it while lounging in a comfortable spot",
+        "type": "Relax",
+        "isComplete": false
+    },
+    {
+        "description": "\"ADDD RELAX\"",
         "type": "Relax",
         "isComplete": false
     }

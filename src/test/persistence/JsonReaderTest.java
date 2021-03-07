@@ -32,7 +32,7 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderEmptyExerciseList() {
-        JsonReader reader = new JsonReader("./data/testReaderEmptyWorkRoom.json");
+        JsonReader reader = new JsonReader("./data/testReaderEmptyExerciseList.json");
         try {
             ExerciseList el = reader.read();
             assertEquals(0, el.size());
@@ -43,7 +43,7 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderGeneralExerciseList() {
-        JsonReader reader = new JsonReader("./data/testReaderGeneralWorkRoom.json");
+        JsonReader reader = new JsonReader("./data/testReaderGeneralExerciseList.json");
         try {
             ExerciseList el = reader.read();
             List<Exercise> exerciseList = el.getExercises();
