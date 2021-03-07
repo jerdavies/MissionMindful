@@ -2,7 +2,7 @@
     {
         "description": "Write down 3 things you appreciate from today",
         "type": "Act",
-        "isComplete": true
+        "isComplete": false
     },
     {
         "description": "Get some exercise, without your phone, and focus on the physical sensations",
@@ -17,7 +17,7 @@
     {
         "description": "Take 20 deep breaths; inhale through nose, exhale with mouth",
         "type": "Breathe",
-        "isComplete": false
+        "isComplete": true
     },
     {
         "description": "Every time your phone vibrates today, pause and take one breath",

@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -126,6 +127,11 @@ public class ExerciseList implements Writable {
     // EFFECTS: getter method for list indexing
     public Exercise get(int i) {
         return this.exerciseList.get(i);
+    }
+
+    // EFFECTS: returns an unmodifiable list of exercises in this ExerciseList
+    public List<Exercise> getExercises() {
+        return Collections.unmodifiableList(exerciseList);
     }
 
     @Override

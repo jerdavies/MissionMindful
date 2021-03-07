@@ -13,7 +13,7 @@ import static model.ExerciseList.*;
 
 /**
  * User interface for the Mission Mindful app.
- * Citation: Large portions of code taken and modified from ui package in CPSC210 TellerApp.
+ * Citation: Large portions of code taken and modified from ui packages in TellerApp and JsonSerializationDemo.
  */
 public class MindfulnessApp {
     private static final String JSON_STORE = "./data/exerciseList.json";

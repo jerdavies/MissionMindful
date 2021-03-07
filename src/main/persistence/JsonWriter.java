@@ -8,7 +8,7 @@ import java.io.*;
 
 
 // Represents a writer that writes JSON representation of exerciseList to file
-// Citation: Code taken and modified from JsonReader.java package in JsonSerializationDemo
+// Citation: Code taken and modified from JsonReader.java class in JsonSerializationDemo
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;

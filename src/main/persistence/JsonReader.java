@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import org.json.*;
 
 // Represents a reader that reads ExerciseList from JSON data stored in file
-// Citation: Code taken and modified from JsonReader.java package in JsonSerializationDemo
+// Citation: Code taken and modified from JsonReader.java class in JsonSerializationDemo
 public class JsonReader {
     private String source;
 
