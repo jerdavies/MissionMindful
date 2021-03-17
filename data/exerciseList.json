@@ -17,22 +17,22 @@
     {
         "description": "Take 20 deep breaths; inhale through nose, exhale with mouth",
         "type": "Breathe",
-        "isComplete": true
+        "isComplete": false
     },
     {
         "description": "Every time your phone vibrates today, pause and take one breath",
         "type": "Breathe",
-        "isComplete": true
+        "isComplete": false
     },
     {
         "description": "Follow along with a guided meditation on Youtube",
         "type": "Breathe",
-        "isComplete": true
+        "isComplete": false
     },
     {
         "description": "Walk for 10 minutes today, without your phone, focused on your surroundings",
         "type": "Notice",
-        "isComplete": true
+        "isComplete": false
     },
     {
         "description": "Notice the sensation as you change posture today from sitting to standing or standing to sitting",
@@ -47,31 +47,21 @@
     {
         "description": "Listen to a favourite piece of music",
         "type": "Relax",
-        "isComplete": true
+        "isComplete": false
     },
     {
         "description": "Drink a mindful cup of tea or coffee",
         "type": "Relax",
-        "isComplete": true
+        "isComplete": false
     },
     {
         "description": "Pick up a good book and read it while lounging in a comfortable spot",
         "type": "Relax",
-        "isComplete": true
+        "isComplete": false
     },
     {
-        "description": "relallallalax",
+        "description": "jkjkjkj",
         "type": "Relax",
-        "isComplete": true
-    },
-    {
-        "description": "Breathe1",
-        "type": "Breathe",
-        "isComplete": true
-    },
-    {
-        "description": "Breathe2",
-        "type": "Breathe",
-        "isComplete": true
+        "isComplete": false
     }
 ]}
