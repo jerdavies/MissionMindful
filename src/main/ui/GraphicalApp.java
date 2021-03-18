@@ -20,18 +20,17 @@ public class GraphicalApp extends JFrame implements ActionListener {
 
     public GraphicalApp() {
         initializeGraphics();
-        //initializeInteraction();
+        initializeInteraction();
     }
 
-//
-//    // MODIFIES: this
-//    // EFFECTS:  listens for button actions
-////    private void initializeInteraction() {
-////        b1.addActionListener(this);
-////        b2.addActionListener(this);
-////        b3.addActionListener(this);
-//    }
-//
+    // MODIFIES: this
+    // EFFECTS:  listens for button actions
+    private void initializeInteraction() {
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        b3.addActionListener(this);
+    }
+
     // MODIFIES: this
     // EFFECTS:  draws the JFrame window where the main menu will display
     private void initializeGraphics() {
@@ -64,8 +63,18 @@ public class GraphicalApp extends JFrame implements ActionListener {
     // !!! ADD SPECIFICAITON
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (b1.getModel().isPressed()) {
-            System.out.println("the button is pressed");
+        if (e.getSource() == b1) {
+            System.out.println("b1 was pressed");
+        } else if (e.getSource() == b2) {
+            System.out.println("b2 was pressed");
+        } else if (e.getSource() == b3) {
+            System.out.println("b3 was pressed");
+        } else if (e.getSource() == b4) {
+            System.out.println("b4 was pressed");
+        } else if (e.getSource() == b5) {
+            System.out.println("b5 was pressed");
+        } else if (e.getSource() == b6) {
+            System.out.println("b6 was pressed");
         }
     }
 
