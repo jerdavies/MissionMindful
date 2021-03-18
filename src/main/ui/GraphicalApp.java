@@ -33,7 +33,7 @@ public class GraphicalApp extends JFrame implements ActionListener {
 //    }
 //
     // MODIFIES: this
-    // EFFECTS:  draws the JFrame window where the main menu will display, and populates the buttons
+    // EFFECTS:  draws the JFrame window where the main menu will display
     private void initializeGraphics() {
         JFrame frame = new JFrame("Mission Mindful");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,9 +42,9 @@ public class GraphicalApp extends JFrame implements ActionListener {
         buttonDemo(frame);
         frame.setVisible(true);
     }
-//
-//
 
+    // MODIFIES: this
+    // EFFECTS:  Adds main menu buttons to the frame
     public void buttonDemo(JFrame frame) {
         b1 = new JButton("Button 1");
         b2 = new JButton("Button 2");
