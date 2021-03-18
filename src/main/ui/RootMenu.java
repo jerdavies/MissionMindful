@@ -4,31 +4,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 
 
-public class GraphicalApp extends JFrame implements ActionListener {
+public class RootMenu extends JFrame implements ActionListener {
 
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 700;
-    protected JButton b1;
-    protected JButton b2;
-    protected JButton b3;
-    protected JButton b4;
-    protected JButton b5;
-    protected JButton b6;
-    private JFrame frame;
+    protected JButton choose;
+    protected JButton view;
+    protected JButton add;
+    protected JButton save;
+    protected JButton load;
+    protected JButton exit;
+    private List<JButton> rootMenuButtons;
 
-    public GraphicalApp() {
+    public RootMenu() {
         initializeGraphics();
         initializeInteraction();
-    }
-
-    // MODIFIES: this
-    // EFFECTS:  listens for button actions
-    private void initializeInteraction() {
-        b1.addActionListener(this);
-        b2.addActionListener(this);
-        b3.addActionListener(this);
     }
 
     // MODIFIES: this
@@ -38,42 +32,61 @@ public class GraphicalApp extends JFrame implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(WIDTH,HEIGHT);
         frame.setLayout(new GridLayout(6,1));
-        buttonDemo(frame);
+        addButtonsToMenu(frame);
         frame.setVisible(true);
     }
 
     // MODIFIES: this
-    // EFFECTS:  Adds main menu buttons to the frame
-    public void buttonDemo(JFrame frame) {
-        b1 = new JButton("Button 1");
-        b2 = new JButton("Button 2");
-        b3 = new JButton("Button 3");
-        b4 = new JButton("Button 4");
-        b5 = new JButton("Button 5");
-        b6 = new JButton("Button 6");
-
-        frame.add(b1);
-        frame.add(b2);
-        frame.add(b3);
-        frame.add(b4);
-        frame.add(b5);
-        frame.add(b6);
+    // EFFECTS:  listens for button actions
+    private void initializeInteraction() {
+        for (JButton b : rootMenuButtons) {
+            b.addActionListener(this);
+        }
     }
 
-    // !!! ADD SPECIFICAITON
+    // MODIFIES: this
+    // EFFECTS:  Adds main menu buttons to the frame
+    public void addButtonsToMenu(JFrame frame) {
+        choose = new JButton("Choose a mindfulness exercise");
+        view = new JButton("View completed exercises");
+        add = new JButton("Add my own exercise");
+        save = new JButton("Save mindfulness program to file");
+        load = new JButton("Load mindfulness program from file");
+        exit = new JButton("Exit");
+
+        makeRootMenuButtonList();
+
+        for (JButton b : rootMenuButtons) {
+            frame.add(b);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS:  Adds main menu button to form a collection of buttons
+    public void makeRootMenuButtonList() {
+        rootMenuButtons = new LinkedList<JButton>();
+        rootMenuButtons.add(this.choose);
+        rootMenuButtons.add(this.view);
+        rootMenuButtons.add(this.add);
+        rootMenuButtons.add(this.save);
+        rootMenuButtons.add(this.load);
+        rootMenuButtons.add(this.exit);
+    }
+
+    // EFFECTS: Handles buttonEvent and brings user to next screen based on button clicked
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == b1) {
+        if (e.getSource() == choose) {
             System.out.println("b1 was pressed");
-        } else if (e.getSource() == b2) {
+        } else if (e.getSource() == view) {
             System.out.println("b2 was pressed");
-        } else if (e.getSource() == b3) {
+        } else if (e.getSource() == add) {
             System.out.println("b3 was pressed");
-        } else if (e.getSource() == b4) {
+        } else if (e.getSource() == save) {
             System.out.println("b4 was pressed");
-        } else if (e.getSource() == b5) {
+        } else if (e.getSource() == load) {
             System.out.println("b5 was pressed");
-        } else if (e.getSource() == b6) {
+        } else if (e.getSource() == exit) {
             System.out.println("b6 was pressed");
         }
     }

@@ -1,10 +1,7 @@
 package ui;
 
-import model.ExerciseList;
-import java.io.FileNotFoundException;
-
 public class Main {
     public static void main(String[] args) {
-        new GraphicalApp();
+        new RootMenu();
     }
 }
