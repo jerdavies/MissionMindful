@@ -2,7 +2,8 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class GraphicalApp extends JFrame implements ActionListener {
@@ -12,66 +13,62 @@ public class GraphicalApp extends JFrame implements ActionListener {
     protected JButton b1;
     protected JButton b2;
     protected JButton b3;
+    protected JButton b4;
+    protected JButton b5;
+    protected JButton b6;
+    private JFrame frame;
 
     public GraphicalApp() {
-        super("Main Menu: Mission Mindful");
-        initializeFields();
         initializeGraphics();
-        initializeInteraction();
+        //initializeInteraction();
     }
 
-    // MODIFIES: this
-    // EFFECTS:  listens for button acctions
-    private void initializeInteraction() {
-        b1.addActionListener(this);
-        b2.addActionListener(this);
-        b3.addActionListener(this);
-    }
-
-    // MODIFIES: this
-    // EFFECTS:  sets activeTool, currentDrawing to null, and instantiates drawings and tools with ArrayList
-    //           this method is called by the DrawingEditor constructor
-    private void initializeFields() {
-//        activeTool = null;
-//        currentDrawing = null;
-//        tools = new ArrayList<Tool>();
-    }
-
+//
+//    // MODIFIES: this
+//    // EFFECTS:  listens for button actions
+////    private void initializeInteraction() {
+////        b1.addActionListener(this);
+////        b2.addActionListener(this);
+////        b3.addActionListener(this);
+//    }
+//
     // MODIFIES: this
     // EFFECTS:  draws the JFrame window where the main menu will display, and populates the buttons
     private void initializeGraphics() {
-        setLayout(new BorderLayout());
-        setMinimumSize(new Dimension(WIDTH, HEIGHT));
-        buttonDemo();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
+        JFrame frame = new JFrame("Mission Mindful");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(WIDTH,HEIGHT);
+        frame.setLayout(new GridLayout(6,1));
+        buttonDemo(frame);
+        frame.setVisible(true);
     }
+//
+//
 
-
-    public void buttonDemo() {
-//        ImageIcon leftButtonIcon = createImageIcon("images/right.gif");
-//        ImageIcon middleButtonIcon = createImageIcon("images/middle.gif");
-//        ImageIcon rightButtonIcon = createImageIcon("images/left.gif");
-
+    public void buttonDemo(JFrame frame) {
         b1 = new JButton("Button 1");
-
         b2 = new JButton("Button 2");
-
         b3 = new JButton("Button 3");
+        b4 = new JButton("Button 4");
+        b5 = new JButton("Button 5");
+        b6 = new JButton("Button 6");
 
-        //Add Components to this container, using the default FlowLayout.
-        add(b1);
-        add(b2);
-        add(b3);
+        frame.add(b1);
+        frame.add(b2);
+        frame.add(b3);
+        frame.add(b4);
+        frame.add(b5);
+        frame.add(b6);
     }
 
     // !!! ADD SPECIFICAITON
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (b1.getModel().isPressed()) {
             System.out.println("the button is pressed");
         }
     }
+
 
     // DON'T DELETE ----------------------------------------------
 
