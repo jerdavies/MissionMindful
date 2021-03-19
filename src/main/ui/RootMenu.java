@@ -12,6 +12,8 @@ public class RootMenu extends JFrame implements ActionListener {
 
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 700;
+
+    private JFrame frame;
     protected JButton choose;
     protected JButton view;
     protected JButton add;
@@ -26,13 +28,14 @@ public class RootMenu extends JFrame implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS:  draws the JFrame window where the main menu will display
+    // EFFECTS:  draws the JFrame window where the root menu will display
     private void initializeGraphics() {
-        JFrame frame = new JFrame("Mission Mindful");
+        frame = new JFrame("Mission Mindful");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(WIDTH,HEIGHT);
+        frame.setLocationRelativeTo(null);
         frame.setLayout(new GridLayout(6,1));
-        addButtonsToMenu(frame);
+        addButtonsToMenu();
         frame.setVisible(true);
     }
 
@@ -45,8 +48,8 @@ public class RootMenu extends JFrame implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS:  Adds main menu buttons to the frame
-    public void addButtonsToMenu(JFrame frame) {
+    // EFFECTS:  Adds root menu buttons to the frame
+    public void addButtonsToMenu() {
         choose = new JButton("Choose a mindfulness exercise");
         view = new JButton("View completed exercises");
         add = new JButton("Add my own exercise");
@@ -62,7 +65,15 @@ public class RootMenu extends JFrame implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS:  Adds main menu button to form a collection of buttons
+    // EFFECTS:  Remove root menu buttons from the frame
+    public void removeButtonsFromRootMenu() {
+        for (JButton b : rootMenuButtons) {
+            frame.remove(b);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS:  Adds root menu button to form a collection of buttons
     public void makeRootMenuButtonList() {
         rootMenuButtons = new LinkedList<JButton>();
         rootMenuButtons.add(this.choose);
@@ -78,6 +89,8 @@ public class RootMenu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == choose) {
             System.out.println("b1 was pressed");
+            removeButtonsFromRootMenu();
+            new ExerciseMenu(this.frame);
         } else if (e.getSource() == view) {
             System.out.println("b2 was pressed");
         } else if (e.getSource() == add) {
