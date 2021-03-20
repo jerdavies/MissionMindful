@@ -28,8 +28,8 @@ public class RootMenu extends JFrame implements ActionListener {
     private List<JButton> rootMenuButtons;
     ExerciseList exerciseList;
 
-    public RootMenu() {
-        exerciseList = new ExerciseList(false);
+    public RootMenu(ExerciseList exerciseList) {
+        this.exerciseList = exerciseList;
         initializeGraphics();
         initializeInteraction();
     }
@@ -67,6 +67,7 @@ public class RootMenu extends JFrame implements ActionListener {
         makeRootMenuButtonList();
 
         for (JButton b : rootMenuButtons) {
+            b.setFont(new Font("Dialog", Font.BOLD, 20));
             frame.add(b);
         }
     }

@@ -2,6 +2,7 @@ package ui;
 
 import model.Exercise;
 import model.ExerciseList;
+
 import static model.ExerciseList.*;
 
 import javax.imageio.ImageIO;
@@ -9,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -28,19 +28,20 @@ public class ExercisePresenter implements ActionListener {
     private JPanel bottomPane;
     private JPanel southBottomPane;
     protected JButton markCompleteButton;
-    protected JButton noButton;
-    protected JButton notice;
-    protected JButton relax;
+    protected JButton doNotMarkCompleteButton;
     private JLabel exerciseTypeText;
     private JLabel exerciseDescriptionText;
     private JLabel picture;
     private List<JButton> exercisePresenterButtons;
     private Exercise exercise;
+    private ExerciseList exerciseList;
 
     // REQUIRES: exerciseType is one of: DEFAULT_EX_TYPE_1, DEFAULT_EX_TYPE_2, DEFAULT_EX_TYPE_3, DEFAULT_EX_TYPE_4
-    public ExercisePresenter(JFrame frame, Exercise exercise) {
+    public ExercisePresenter(JFrame frame, Exercise exercise, ExerciseList exerciseList) {
         this.frame = frame;
         this.exercise = exercise;
+        this.exerciseList = exerciseList;
+
         try {
             initializeGraphics();
         } catch (IOException e) {
@@ -119,7 +120,7 @@ public class ExercisePresenter implements ActionListener {
 
     private void formatExerciseDescriptionText() {
         exerciseDescriptionText.setText(exercise.getDescription());
-        exerciseDescriptionText.setFont(new Font("SansSerif", Font.ITALIC, 22));
+        exerciseDescriptionText.setFont(new Font("SansSerif", Font.ITALIC, 26));
         exerciseDescriptionText.setHorizontalAlignment(JTextField.CENTER);
     }
 
@@ -134,11 +135,13 @@ public class ExercisePresenter implements ActionListener {
     // MODIFIES: this
     // EFFECTS:  Add Y/N buttons to the panel to allow user to mark exercise as complete
     public void addButtonsToSouthBottomPane() {
-        markCompleteButton = new JButton("Mark exercise as complete");
+        markCompleteButton = new JButton("Mark exercise as complete and return to main menu");
+        doNotMarkCompleteButton = new JButton("Return to main menu without marking exercise as complete");
 
         makeExercisePresenterButtonList();
 
         for (JButton b : exercisePresenterButtons) {
+            b.setFont(new Font("Dialog", Font.BOLD, 16));
             southBottomPane.add(b);
         }
     }
@@ -148,20 +151,18 @@ public class ExercisePresenter implements ActionListener {
     public void makeExercisePresenterButtonList() {
         exercisePresenterButtons = new LinkedList<JButton>();
         exercisePresenterButtons.add(this.markCompleteButton);
+        exercisePresenterButtons.add(this.doNotMarkCompleteButton);
     }
 
     // EFFECTS: Handles buttonEvent and brings user to next screen based on button clicked
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == markCompleteButton) {
-            System.out.println("act");
+            exercise.markExerciseComplete();
+            new RootMenu(exerciseList);
 
-        } else if (e.getSource() == noButton) {
-            System.out.println("breathe");
-        } else if (e.getSource() == notice) {
-            System.out.println("notice");
-        } else if (e.getSource() == relax) {
-            System.out.println("relax");
+        } else if (e.getSource() == doNotMarkCompleteButton) {
+            new RootMenu(exerciseList);
         }
     }
 }

@@ -62,6 +62,7 @@ public class ExerciseMenu implements ActionListener {
         makeExerciseMenuButtonList();
 
         for (JButton b : exerciseMenuButtons) {
+            b.setFont(new Font("Dialog", Font.BOLD, 20));
             frame.add(b);
         }
     }
@@ -121,7 +122,7 @@ public class ExerciseMenu implements ActionListener {
         if (exercise == null) {
             System.out.println("No more exercises left.  !!! Jeremy needs to make a user pop-up message");
         } else {
-            new ExercisePresenter(this.frame, exercise);
+            new ExercisePresenter(this.frame, exercise, this.exerciseList);
         }
     }
 }
