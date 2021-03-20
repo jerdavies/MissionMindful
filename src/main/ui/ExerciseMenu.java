@@ -1,5 +1,8 @@
 package ui;
 
+import model.Exercise;
+import model.ExerciseList;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static model.ExerciseList.*;
-import static model.ExerciseList.DEFAULT_EX_TYPE_4;
 
 /**
  * GUI menu page to select which mindfulness exercise to perform or add.
@@ -21,9 +23,12 @@ public class ExerciseMenu implements ActionListener {
     protected JButton noticeButton;
     protected JButton relaxButton;
     private List<JButton> exerciseMenuButtons;
+    private ExerciseList exerciseList;
 
-    public ExerciseMenu(JFrame frame) {
+    public ExerciseMenu(JFrame frame, ExerciseList exerciseList) {
         this.frame = frame;
+        this.exerciseList = exerciseList;
+
         initializeGraphics();
         initializeInteraction();
     }
@@ -39,7 +44,7 @@ public class ExerciseMenu implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS:  listens for button actions
+    // EFFECTS:  adds listening capabilities for button actions
     private void initializeInteraction() {
         for (JButton b : exerciseMenuButtons) {
             b.addActionListener(this);
@@ -47,7 +52,7 @@ public class ExerciseMenu implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS:  Adds exercise menu buttons to the frame
+    // EFFECTS:  adds exercise menu buttons to the frame
     public void addButtonsToExerciseMenu() {
         actButton = new JButton(DEFAULT_EX_TYPE_1);
         breatheButton = new JButton(DEFAULT_EX_TYPE_2);
@@ -82,17 +87,41 @@ public class ExerciseMenu implements ActionListener {
     // EFFECTS: Handles buttonEvent and brings user to next screen based on button clicked
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == actButton) {
-            removeButtonsFromExerciseMenu();
-            new ExercisePresenter(this.frame, DEFAULT_EX_TYPE_1, "Test description");
-            System.out.println("act");
+        String type = "";
 
+        if (e.getSource() == actButton) {
+            System.out.println(DEFAULT_EX_TYPE_1);
+            type = DEFAULT_EX_TYPE_1;
         } else if (e.getSource() == breatheButton) {
-            System.out.println("breathe");
+            System.out.println(DEFAULT_EX_TYPE_2);
+            type = DEFAULT_EX_TYPE_2;
         } else if (e.getSource() == noticeButton) {
-            System.out.println("notice");
+            System.out.println(DEFAULT_EX_TYPE_3);
+            type = DEFAULT_EX_TYPE_3;
         } else if (e.getSource() == relaxButton) {
-            System.out.println("relax");
+            System.out.println(DEFAULT_EX_TYPE_4);
+            type = DEFAULT_EX_TYPE_4;
+        }
+
+        if (!type.equals("")) {
+            removeButtonsFromExerciseMenu();
+            presentExerciseToUser(type);
+        }
+    }
+
+    // REQUIRES: exerciseType is one of: DEFAULT_EX_TYPE_1, DEFAULT_EX_TYPE_2, DEFAULT_EX_TYPE_3, DEFAULT_EX_TYPE_4
+    // MODIFIES: this
+    // EFFECTS: If there are still exercises to complete for the given type, present user with exercise of given type;
+    //          otherwise, flag to user that there are no more exercises left of the selected type
+    public void presentExerciseToUser(String type) {
+        Exercise exercise;
+
+        exercise = this.exerciseList.getNextExercise(type);
+
+        if (exercise == null) {
+            System.out.println("No more exercises left.  !!! Jeremy needs to make a user pop-up message");
+        } else {
+            new ExercisePresenter(this.frame, exercise);
         }
     }
 }
