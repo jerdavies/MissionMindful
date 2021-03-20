@@ -7,19 +7,21 @@ import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
 
-
+/**
+ * Root Menu and base JFrame for graphical user interface for the Mission Mindful app.
+ */
 public class RootMenu extends JFrame implements ActionListener {
 
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 700;
 
     private JFrame frame;
-    protected JButton choose;
-    protected JButton view;
-    protected JButton add;
-    protected JButton save;
-    protected JButton load;
-    protected JButton exit;
+    protected JButton chooseButton;
+    protected JButton viewButton;
+    protected JButton addButton;
+    protected JButton saveButton;
+    protected JButton loadButton;
+    protected JButton exitButton;
     private List<JButton> rootMenuButtons;
 
     public RootMenu() {
@@ -50,12 +52,12 @@ public class RootMenu extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS:  Adds root menu buttons to the frame
     public void addButtonsToMenu() {
-        choose = new JButton("Choose a mindfulness exercise");
-        view = new JButton("View completed exercises");
-        add = new JButton("Add my own exercise");
-        save = new JButton("Save mindfulness program to file");
-        load = new JButton("Load mindfulness program from file");
-        exit = new JButton("Exit");
+        chooseButton = new JButton("Choose a mindfulness exercise");
+        viewButton = new JButton("View completed exercises");
+        addButton = new JButton("Add my own exercise");
+        saveButton = new JButton("Save mindfulness program to file");
+        loadButton = new JButton("Load mindfulness program from file");
+        exitButton = new JButton("Exit");
 
         makeRootMenuButtonList();
 
@@ -76,30 +78,30 @@ public class RootMenu extends JFrame implements ActionListener {
     // EFFECTS:  Adds root menu button to form a collection of buttons
     public void makeRootMenuButtonList() {
         rootMenuButtons = new LinkedList<JButton>();
-        rootMenuButtons.add(this.choose);
-        rootMenuButtons.add(this.view);
-        rootMenuButtons.add(this.add);
-        rootMenuButtons.add(this.save);
-        rootMenuButtons.add(this.load);
-        rootMenuButtons.add(this.exit);
+        rootMenuButtons.add(this.chooseButton);
+        rootMenuButtons.add(this.viewButton);
+        rootMenuButtons.add(this.addButton);
+        rootMenuButtons.add(this.saveButton);
+        rootMenuButtons.add(this.loadButton);
+        rootMenuButtons.add(this.exitButton);
     }
 
     // EFFECTS: Handles buttonEvent and brings user to next screen based on button clicked
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == choose) {
+        if (e.getSource() == chooseButton) {
             System.out.println("b1 was pressed");
             removeButtonsFromRootMenu();
             new ExerciseMenu(this.frame);
-        } else if (e.getSource() == view) {
+        } else if (e.getSource() == viewButton) {
             System.out.println("b2 was pressed");
-        } else if (e.getSource() == add) {
+        } else if (e.getSource() == addButton) {
             System.out.println("b3 was pressed");
-        } else if (e.getSource() == save) {
+        } else if (e.getSource() == saveButton) {
             System.out.println("b4 was pressed");
-        } else if (e.getSource() == load) {
+        } else if (e.getSource() == loadButton) {
             System.out.println("b5 was pressed");
-        } else if (e.getSource() == exit) {
+        } else if (e.getSource() == exitButton) {
             System.out.println("b6 was pressed");
         }
     }
