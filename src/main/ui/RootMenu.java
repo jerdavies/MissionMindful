@@ -27,7 +27,6 @@ public class RootMenu extends JFrame implements ActionListener {
     protected JButton addButton;
     protected JButton saveButton;
     protected JButton loadButton;
-    protected JButton exitButton;
     private List<JButton> rootMenuButtons;
     ExerciseList exerciseList;
 
@@ -59,7 +58,7 @@ public class RootMenu extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS:  sets the frame layout and adds the root menu buttons
     private void initializeGraphics() {
-        frame.setLayout(new GridLayout(6,1));
+        frame.setLayout(new GridLayout(5,1));
         addButtonsToMenu();
         frame.setVisible(true);
     }
@@ -80,7 +79,6 @@ public class RootMenu extends JFrame implements ActionListener {
         addButton = new JButton("Add my own exercise");
         saveButton = new JButton("Save mindfulness program to file");
         loadButton = new JButton("Load mindfulness program from file");
-        exitButton = new JButton("Exit");
 
         makeRootMenuButtonList();
 
@@ -107,7 +105,6 @@ public class RootMenu extends JFrame implements ActionListener {
         rootMenuButtons.add(this.addButton);
         rootMenuButtons.add(this.saveButton);
         rootMenuButtons.add(this.loadButton);
-        rootMenuButtons.add(this.exitButton);
     }
 
     // EFFECTS: Handles buttonEvent and brings user to next screen based on button clicked
@@ -116,15 +113,13 @@ public class RootMenu extends JFrame implements ActionListener {
         if (e.getSource() == chooseButton) {
             displayExerciseMenu(CHOOSE);
         } else if (e.getSource() == viewButton) {
-            System.out.println("b2 was pressed"); // !!!
+            System.out.println("!!! Jeremy to add view list functionality"); // !!!
         } else if (e.getSource() == addButton) {
             displayExerciseMenu(ADD);
         } else if (e.getSource() == saveButton) {
-            System.out.println("b4 was pressed");
+            System.out.println("!!! Jeremy to add save functionality");
         } else if (e.getSource() == loadButton) {
-            System.out.println("b5 was pressed");
-        } else if (e.getSource() == exitButton) {
-            System.out.println("b6 was pressed");
+            System.out.println("!!! Jeremy to add load functionality");
         }
     }
 

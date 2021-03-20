@@ -17,6 +17,8 @@ import static model.ExerciseList.*;
  * GUI menu page to select which mindfulness exercise to perform or add.
  */
 public class ExerciseMenu implements ActionListener {
+    public static final String TEXTENTEREDCOMMAND = "textfield";
+
     private JFrame frame;
     private JPanel northPane;
     private JPanel centrePane;
@@ -26,6 +28,7 @@ public class ExerciseMenu implements ActionListener {
     protected JButton noticeButton;
     protected JButton relaxButton;
     protected JButton mainMenuButton;
+    private JLabel southTextLabel;
     private List<JButton> exerciseMenuButtons;
     private ExerciseList exerciseList;
     private String menuPurpose;
@@ -66,17 +69,23 @@ public class ExerciseMenu implements ActionListener {
         mainMenuButton.addActionListener(this);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates JPanel located in NORTH position
     private void configureNorthPane() {
         northPane = new JPanel();
         northPane.add(createNorthTextLabel(), BorderLayout.NORTH);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates JPanel located in CENTER position
     private void configureCentrePane() {
         centrePane = new JPanel();
         centrePane.setLayout(new GridLayout(2,2));
         addButtonsToExerciseMenu();
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates JPanel located in SOUTH position
     private void configureSouthPane() {
         southPane = new JPanel();
         southPane.setLayout(new GridLayout(2,1));
@@ -87,8 +96,19 @@ public class ExerciseMenu implements ActionListener {
         southPane.add(createSouthTextLabel());
     }
 
+    // EFFECTS: returns the customized JLabel with the text to display at the top of the exercise menu
+    private JLabel createNorthTextLabel() {
+        JLabel northTextLabel = new JLabel();
+
+        northTextLabel.setText(setNorthText());
+        northTextLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+        northTextLabel.setHorizontalAlignment(JTextField.CENTER);
+
+        return northTextLabel;
+    }
+
     // EFFECTS: returns the text to display at the top of exercise menu
-    private String assignNorthText() {
+    private String setNorthText() {
         String northText = "";
         if (this.menuPurpose == RootMenu.ADD) {
             northText = "Select the type of exercise you'd like to add:";
@@ -98,29 +118,11 @@ public class ExerciseMenu implements ActionListener {
         return northText;
     }
 
-    // EFFECTS: returns the customized JLabel with the text to display at the top of the exercise menu
-    private JLabel createNorthTextLabel() {
-        JLabel northTextLabel = new JLabel();
-
-        northTextLabel.setText(assignNorthText());
-        northTextLabel.setFont(new Font("Dialog", Font.BOLD, 20));
-        northTextLabel.setHorizontalAlignment(JTextField.CENTER);
-
-        return northTextLabel;
-    }
-
-    // EFFECTS: returns the text to display at the bottom of exercise menu
-    private String assignSouthText() {
-        String southText = "";
-        southText = "!!! placeholder for now. Jeremy to fix";
-        return southText;
-    }
-
     // EFFECTS: returns the customized JLabel with the text to display at the bottom of the exercise menu
     private JLabel createSouthTextLabel() {
-        JLabel southTextLabel = new JLabel();
+        southTextLabel = new JLabel();
 
-        southTextLabel.setText(assignSouthText());
+        southTextLabel.setText("");
         southTextLabel.setFont(new Font("Dialog", Font.ITALIC, 20));
         southTextLabel.setHorizontalAlignment(JTextField.CENTER);
 
@@ -167,7 +169,6 @@ public class ExerciseMenu implements ActionListener {
         String type = "";
 
         if (e.getSource() == mainMenuButton) {
-            System.out.println("!!! go to main menu!");
             removePanes();
             new RootMenu(frame, exerciseList);
         } else {
@@ -175,29 +176,32 @@ public class ExerciseMenu implements ActionListener {
 
             if (menuPurpose == RootMenu.CHOOSE) {
                 chooseNextExercise(type);
-            } else {
-                System.out.println("!!! Jeremy needs to create the add-exercise functionality");
+            } else if (!type.equals("")) {
+                String s = (String)JOptionPane.showInputDialog(frame, "Enter an exercise description:\n",
+                        "Add New " + type + " Exercise", JOptionPane.PLAIN_MESSAGE,
+                        null, null, "Type here");
+
+                exerciseList.addExercise(type, s, false);
+                southTextLabel.setText("A " + type + " exercise was successfully added!");
             }
         }
     }
 
+    // EFFECTS: returns the type of the chosen exercise as a string
     private String getChosenTypeAsString(ActionEvent e, String type) {
         if (e.getSource() == actButton) {
-            System.out.println(DEFAULT_EX_TYPE_1);
             type = DEFAULT_EX_TYPE_1;
         } else if (e.getSource() == breatheButton) {
-            System.out.println(DEFAULT_EX_TYPE_2);
             type = DEFAULT_EX_TYPE_2;
         } else if (e.getSource() == noticeButton) {
-            System.out.println(DEFAULT_EX_TYPE_3);
             type = DEFAULT_EX_TYPE_3;
         } else if (e.getSource() == relaxButton) {
-            System.out.println(DEFAULT_EX_TYPE_4);
             type = DEFAULT_EX_TYPE_4;
         }
         return type;
     }
 
+    // EFFECTS: Helper method to set up screen before the exercise prompt is displayed
     private void chooseNextExercise(String type) {
         if (!type.equals("")) {
             removePanes();
@@ -235,6 +239,8 @@ public class ExerciseMenu implements ActionListener {
         JOptionPane.showMessageDialog(frame, noExercisesLeftLabel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes the ExerciseMenu panels before displaying a different screen
     private void removePanes() {
         frame.remove(northPane);
         frame.remove(centrePane);
