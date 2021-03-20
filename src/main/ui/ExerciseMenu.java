@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.InvalidActionSelection;
 import model.Exercise;
 import model.ExerciseList;
 
@@ -16,7 +17,6 @@ import static model.ExerciseList.*;
  * GUI menu page to select which mindfulness exercise to perform or add.
  */
 public class ExerciseMenu implements ActionListener {
-
     private JFrame frame;
     protected JButton actButton;
     protected JButton breatheButton;
@@ -24,8 +24,13 @@ public class ExerciseMenu implements ActionListener {
     protected JButton relaxButton;
     private List<JButton> exerciseMenuButtons;
     private ExerciseList exerciseList;
+    private String menuPurpose;
 
-    public ExerciseMenu(JFrame frame, ExerciseList exerciseList) {
+    public ExerciseMenu(JFrame frame, ExerciseList exerciseList, String menuPurpose) throws InvalidActionSelection {
+        if (!(menuPurpose.equals(RootMenu.CHOOSE) || menuPurpose.equals(RootMenu.ADD))) {
+            throw new InvalidActionSelection();
+        }
+        this.menuPurpose = menuPurpose;
         this.frame = frame;
         this.exerciseList = exerciseList;
 
@@ -104,9 +109,21 @@ public class ExerciseMenu implements ActionListener {
             type = DEFAULT_EX_TYPE_4;
         }
 
+        if (menuPurpose == RootMenu.CHOOSE) {
+            chooseNextExercise(type);
+        } else {
+            System.out.println("!!! Jeremy needs to create the add-exercise functionality");
+        }
+    }
+
+    private void chooseNextExercise(String type) {
         if (!type.equals("")) {
             removeButtonsFromExerciseMenu();
-            presentExerciseToUser(type);
+            try {
+                presentExerciseToUser(type);
+            } catch (InvalidActionSelection invalidActionSelection) {
+                invalidActionSelection.printStackTrace();
+            }
         }
     }
 
@@ -114,15 +131,25 @@ public class ExerciseMenu implements ActionListener {
     // MODIFIES: this
     // EFFECTS: If there are still exercises to complete for the given type, present user with exercise of given type;
     //          otherwise, flag to user that there are no more exercises left of the selected type
-    public void presentExerciseToUser(String type) {
+    public void presentExerciseToUser(String type) throws InvalidActionSelection {
         Exercise exercise;
 
         exercise = this.exerciseList.getNextExercise(type);
 
         if (exercise == null) {
-            System.out.println("No more exercises left.  !!! Jeremy needs to make a user pop-up message");
+            displayNoExercisesDialog(type);
+            new ExerciseMenu(frame, exerciseList, RootMenu.CHOOSE);
         } else {
             new ExercisePresenter(this.frame, exercise, this.exerciseList);
         }
+    }
+
+    // EFFECTS: Displays pop-up dialog to user telling them
+    // there are currently no more exercises of selected type left
+    private void displayNoExercisesDialog(String type) {
+        JLabel noExercisesLeftLabel = new JLabel("\nNo more " + type + " exercises left. "
+                + "If you wish, add a new one from the" + " main menu.");
+        noExercisesLeftLabel.setFont(new Font("Dialog", Font.PLAIN, 16));
+        JOptionPane.showMessageDialog(frame, noExercisesLeftLabel);
     }
 }

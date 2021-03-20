@@ -1,6 +1,7 @@
 package ui;
 
 
+import exceptions.InvalidActionSelection;
 import model.ExerciseList;
 
 import javax.swing.*;
@@ -17,6 +18,8 @@ public class RootMenu extends JFrame implements ActionListener {
 
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 700;
+    public static final String CHOOSE = "choose";
+    public static final String ADD = "add";
 
     private JFrame frame;
     protected JButton chooseButton;
@@ -28,19 +31,34 @@ public class RootMenu extends JFrame implements ActionListener {
     private List<JButton> rootMenuButtons;
     ExerciseList exerciseList;
 
+    // Constructor for brand new App called from Main
     public RootMenu(ExerciseList exerciseList) {
+        this.exerciseList = exerciseList;
+        initializeBaseFrame();
+        initializeInteraction();
+    }
+
+    // Constructor for resetting the app to the RootMenu
+    public RootMenu(JFrame frame, ExerciseList exerciseList) {
+        this.frame = frame;
         this.exerciseList = exerciseList;
         initializeGraphics();
         initializeInteraction();
     }
 
     // MODIFIES: this
-    // EFFECTS:  draws the JFrame window where the root menu will display
-    private void initializeGraphics() {
+    // EFFECTS:  constructs the JFrame window where the root menu will display
+    private void initializeBaseFrame() {
         frame = new JFrame("Mission Mindful");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(WIDTH,HEIGHT);
         frame.setLocationRelativeTo(null);
+        initializeGraphics();
+    }
+
+    // MODIFIES: this
+    // EFFECTS:  sets the frame layout and adds the root menu buttons
+    private void initializeGraphics() {
         frame.setLayout(new GridLayout(6,1));
         addButtonsToMenu();
         frame.setVisible(true);
@@ -96,19 +114,28 @@ public class RootMenu extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == chooseButton) {
-            System.out.println("b1 was pressed");
-            removeButtonsFromRootMenu();
-            new ExerciseMenu(this.frame, exerciseList);
+            displayExerciseMenu(CHOOSE);
         } else if (e.getSource() == viewButton) {
             System.out.println("b2 was pressed"); // !!!
         } else if (e.getSource() == addButton) {
-            System.out.println("b3 was pressed");
+            displayExerciseMenu(ADD);
         } else if (e.getSource() == saveButton) {
             System.out.println("b4 was pressed");
         } else if (e.getSource() == loadButton) {
             System.out.println("b5 was pressed");
         } else if (e.getSource() == exitButton) {
             System.out.println("b6 was pressed");
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: create new exercise type menu so user can choose which exercise type to do
+    private void displayExerciseMenu(String menuPurpose) {
+        removeButtonsFromRootMenu();
+        try {
+            new ExerciseMenu(this.frame, exerciseList, menuPurpose);
+        } catch (InvalidActionSelection invalidActionSelection) {
+            invalidActionSelection.printStackTrace();
         }
     }
 }
