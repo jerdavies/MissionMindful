@@ -159,12 +159,12 @@ public class ExercisePresenter implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == markCompleteButton) {
             exercise.markExerciseComplete();
-            new RootMenu(frame, exerciseList);
             removePanes();
+            new RootMenu(frame, exerciseList);
 
         } else if (e.getSource() == doNotMarkCompleteButton) {
-            new RootMenu(frame, exerciseList);
             removePanes();
+            new RootMenu(frame, exerciseList);
         }
     }
 

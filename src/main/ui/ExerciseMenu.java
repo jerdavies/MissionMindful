@@ -18,10 +18,14 @@ import static model.ExerciseList.*;
  */
 public class ExerciseMenu implements ActionListener {
     private JFrame frame;
+    private JPanel northPane;
+    private JPanel centrePane;
+    private JPanel southPane;
     protected JButton actButton;
     protected JButton breatheButton;
     protected JButton noticeButton;
     protected JButton relaxButton;
+    protected JButton mainMenuButton;
     private List<JButton> exerciseMenuButtons;
     private ExerciseList exerciseList;
     private String menuPurpose;
@@ -41,10 +45,15 @@ public class ExerciseMenu implements ActionListener {
     // MODIFIES: this
     // EFFECTS:  edits the frame to display the exercise menu
     private void initializeGraphics() {
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // May not be necessary. Holding here until certain
-        //frame.setLocationRelativeTo(null);   // May not be necessary. Holding here until certain
-        frame.setLayout(new GridLayout(2,2));
-        addButtonsToExerciseMenu();
+        frame.setLayout(new BorderLayout());
+
+        configureNorthPane();
+        frame.add(northPane, BorderLayout.NORTH);
+        configureCentrePane();
+        frame.add(centrePane, BorderLayout.CENTER);
+        configureSouthPane();
+        frame.add(southPane, BorderLayout.SOUTH);
+
         frame.setVisible(true);
     }
 
@@ -54,6 +63,68 @@ public class ExerciseMenu implements ActionListener {
         for (JButton b : exerciseMenuButtons) {
             b.addActionListener(this);
         }
+        mainMenuButton.addActionListener(this);
+    }
+
+    private void configureNorthPane() {
+        northPane = new JPanel();
+        northPane.add(createNorthTextLabel(), BorderLayout.NORTH);
+    }
+
+    private void configureCentrePane() {
+        centrePane = new JPanel();
+        centrePane.setLayout(new GridLayout(2,2));
+        addButtonsToExerciseMenu();
+    }
+
+    private void configureSouthPane() {
+        southPane = new JPanel();
+        southPane.setLayout(new GridLayout(2,1));
+
+        mainMenuButton = new JButton("Return to main menu");
+        mainMenuButton.setFont(new Font("Dialog", Font.BOLD, 20));
+        southPane.add(mainMenuButton);
+        southPane.add(createSouthTextLabel());
+    }
+
+    // EFFECTS: returns the text to display at the top of exercise menu
+    private String assignNorthText() {
+        String northText = "";
+        if (this.menuPurpose == RootMenu.ADD) {
+            northText = "Select the type of exercise you'd like to add:";
+        } else if (this.menuPurpose == RootMenu.CHOOSE) {
+            northText = "Select the type of exercise you'd like to do:";
+        }
+        return northText;
+    }
+
+    // EFFECTS: returns the customized JLabel with the text to display at the top of the exercise menu
+    private JLabel createNorthTextLabel() {
+        JLabel northTextLabel = new JLabel();
+
+        northTextLabel.setText(assignNorthText());
+        northTextLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+        northTextLabel.setHorizontalAlignment(JTextField.CENTER);
+
+        return northTextLabel;
+    }
+
+    // EFFECTS: returns the text to display at the bottom of exercise menu
+    private String assignSouthText() {
+        String southText = "";
+        southText = "!!! placeholder for now. Jeremy to fix";
+        return southText;
+    }
+
+    // EFFECTS: returns the customized JLabel with the text to display at the bottom of the exercise menu
+    private JLabel createSouthTextLabel() {
+        JLabel southTextLabel = new JLabel();
+
+        southTextLabel.setText(assignSouthText());
+        southTextLabel.setFont(new Font("Dialog", Font.ITALIC, 20));
+        southTextLabel.setHorizontalAlignment(JTextField.CENTER);
+
+        return southTextLabel;
     }
 
     // MODIFIES: this
@@ -68,7 +139,7 @@ public class ExerciseMenu implements ActionListener {
 
         for (JButton b : exerciseMenuButtons) {
             b.setFont(new Font("Dialog", Font.BOLD, 20));
-            frame.add(b);
+            centrePane.add(b);
         }
     }
 
@@ -76,7 +147,7 @@ public class ExerciseMenu implements ActionListener {
     // EFFECTS:  Remove exercise menu buttons from the frame
     public void removeButtonsFromExerciseMenu() {
         for (JButton b : exerciseMenuButtons) {
-            frame.remove(b);
+            centrePane.remove(b);
         }
     }
 
@@ -95,6 +166,22 @@ public class ExerciseMenu implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String type = "";
 
+        if (e.getSource() == mainMenuButton) {
+            System.out.println("!!! go to main menu!");
+            removePanes();
+            new RootMenu(frame, exerciseList);
+        } else {
+            type = getChosenTypeAsString(e, type);
+
+            if (menuPurpose == RootMenu.CHOOSE) {
+                chooseNextExercise(type);
+            } else {
+                System.out.println("!!! Jeremy needs to create the add-exercise functionality");
+            }
+        }
+    }
+
+    private String getChosenTypeAsString(ActionEvent e, String type) {
         if (e.getSource() == actButton) {
             System.out.println(DEFAULT_EX_TYPE_1);
             type = DEFAULT_EX_TYPE_1;
@@ -108,17 +195,12 @@ public class ExerciseMenu implements ActionListener {
             System.out.println(DEFAULT_EX_TYPE_4);
             type = DEFAULT_EX_TYPE_4;
         }
-
-        if (menuPurpose == RootMenu.CHOOSE) {
-            chooseNextExercise(type);
-        } else {
-            System.out.println("!!! Jeremy needs to create the add-exercise functionality");
-        }
+        return type;
     }
 
     private void chooseNextExercise(String type) {
         if (!type.equals("")) {
-            removeButtonsFromExerciseMenu();
+            removePanes();
             try {
                 presentExerciseToUser(type);
             } catch (InvalidActionSelection invalidActionSelection) {
@@ -151,5 +233,11 @@ public class ExerciseMenu implements ActionListener {
                 + "If you wish, add a new one from the" + " main menu.");
         noExercisesLeftLabel.setFont(new Font("Dialog", Font.PLAIN, 16));
         JOptionPane.showMessageDialog(frame, noExercisesLeftLabel);
+    }
+
+    private void removePanes() {
+        frame.remove(northPane);
+        frame.remove(centrePane);
+        frame.remove(southPane);
     }
 }
