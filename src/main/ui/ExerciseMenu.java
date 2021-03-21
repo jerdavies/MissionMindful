@@ -17,8 +17,6 @@ import static model.ExerciseList.*;
  * GUI menu page to select which mindfulness exercise to perform or add.
  */
 public class ExerciseMenu implements ActionListener {
-    public static final String TEXTENTEREDCOMMAND = "textfield";
-
     private JFrame frame;
     private JPanel northPane;
     private JPanel centrePane;
@@ -182,7 +180,7 @@ public class ExerciseMenu implements ActionListener {
                         null, null, "Type here");
 
                 exerciseList.addExercise(type, s, false);
-                southTextLabel.setText("A " + type + " exercise was successfully added!");
+                southTextLabel.setText(type + " exercise was successfully added!");
             }
         }
     }

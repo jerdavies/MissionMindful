@@ -113,7 +113,8 @@ public class RootMenu extends JFrame implements ActionListener {
         if (e.getSource() == chooseButton) {
             displayExerciseMenu(CHOOSE);
         } else if (e.getSource() == viewButton) {
-            System.out.println("!!! Jeremy to add view list functionality"); // !!!
+            removeButtonsFromRootMenu();
+            new CompletedExerciseList(frame, exerciseList);
         } else if (e.getSource() == addButton) {
             displayExerciseMenu(ADD);
         } else if (e.getSource() == saveButton) {

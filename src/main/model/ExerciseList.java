@@ -134,6 +134,17 @@ public class ExerciseList implements Writable {
         return Collections.unmodifiableList(exerciseList);
     }
 
+    // EFFECTS: returns the number of completed exercises in this
+    public int getNumberOfCompletedExercises() {
+        int numCompletedExercises = 0;
+        for (Exercise e : this.exerciseList) {
+            if (e.getCompletionStatus() == true) {
+                numCompletedExercises++;
+            }
+        }
+        return numCompletedExercises;
+    }
+
     @Override
     // Citation: Code taken and modified from Workroom.java class in JsonSerializationDemo
     // EFFECTS: returns this as JSON object
@@ -153,5 +164,31 @@ public class ExerciseList implements Writable {
         }
 
         return jsonArray;
+    }
+
+    // EFFECTS: returns list of only completed exercises
+    public ArrayList<Exercise> getCompletedExerciseList() {
+        ArrayList<Exercise> completedExerciseList = new ArrayList<Exercise>();
+
+        for (Exercise e : exerciseList) {
+            if (e.getCompletionStatus() == true) {
+                completedExerciseList.add(e);
+            }
+        }
+        return completedExerciseList;
+    }
+
+    // EFFECTS: returns 2D array of completed exercises
+    public String[][] getCompletedExerciseArray() {
+        int numCompletedExercises = getNumberOfCompletedExercises();
+        List<Exercise> completedExerciseList = getCompletedExerciseList();
+        String[][] arrayCompletedExercises = new String[numCompletedExercises][2];
+        for (int i = 0; i < numCompletedExercises; i++) {
+            Exercise e = completedExerciseList.get(i);
+            arrayCompletedExercises[i][0] = e.getType();
+            arrayCompletedExercises[i][1] = e.getDescription();
+        }
+
+        return arrayCompletedExercises;
     }
 }
