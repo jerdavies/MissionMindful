@@ -7,22 +7,22 @@
     {
         "description": "Get some exercise, without your phone, and focus on the physical sensations",
         "type": "Act",
-        "isComplete": false
+        "isComplete": true
     },
     {
         "description": "De-clutter part of your house or office desk, helping the mind to feel calmer and clearer",
         "type": "Act",
-        "isComplete": false
+        "isComplete": true
     },
     {
         "description": "Take 20 deep breaths; inhale through nose, exhale with mouth",
         "type": "Breathe",
-        "isComplete": false
+        "isComplete": true
     },
     {
         "description": "Every time your phone vibrates today, pause and take one breath",
         "type": "Breathe",
-        "isComplete": false
+        "isComplete": true
     },
     {
         "description": "Follow along with a guided meditation on Youtube",
@@ -47,21 +47,26 @@
     {
         "description": "Listen to a favourite piece of music",
         "type": "Relax",
-        "isComplete": false
+        "isComplete": true
     },
     {
         "description": "Drink a mindful cup of tea or coffee",
         "type": "Relax",
-        "isComplete": false
+        "isComplete": true
     },
     {
         "description": "Pick up a good book and read it while lounging in a comfortable spot",
         "type": "Relax",
-        "isComplete": false
+        "isComplete": true
     },
     {
-        "description": "jkjkjkj",
+        "description": "testAct",
+        "type": "Act",
+        "isComplete": true
+    },
+    {
+        "description": "Hello Relax",
         "type": "Relax",
-        "isComplete": false
+        "isComplete": true
     }
 ]}

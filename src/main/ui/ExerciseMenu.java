@@ -162,6 +162,9 @@ public class ExerciseMenu implements ActionListener {
     }
 
     // EFFECTS: Handles buttonEvent and brings user to next screen based on button clicked
+    //          If mainMenuButton clicked, go to RootMenu
+    //          Else if menuPurpose is CHOOSE, chooseNextExercise of selected type
+    //          Else if menu purpose is not empty string, allow user to add custom exercise of selected type
     @Override
     public void actionPerformed(ActionEvent e) {
         String type = "";
@@ -175,14 +178,20 @@ public class ExerciseMenu implements ActionListener {
             if (menuPurpose == RootMenu.CHOOSE) {
                 chooseNextExercise(type);
             } else if (!type.equals("")) {
-                String s = (String)JOptionPane.showInputDialog(frame, "Enter an exercise description:\n",
-                        "Add New " + type + " Exercise", JOptionPane.PLAIN_MESSAGE,
-                        null, null, "Type here");
-
-                exerciseList.addExercise(type, s, false);
-                southTextLabel.setText(type + " exercise was successfully added!");
+                addCustomExercise(type);
             }
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: allows user to type in a desription and adds the exercise to exerciseList, plus prints add confirmation
+    private void addCustomExercise(String type) {
+        String s = (String)JOptionPane.showInputDialog(frame, "Enter an exercise description:\n",
+                "Add New " + type + " Exercise", JOptionPane.PLAIN_MESSAGE,
+                null, null, "Type here");
+
+        exerciseList.addExercise(type, s, false);
+        southTextLabel.setText(type + " exercise was successfully added!");
     }
 
     // EFFECTS: returns the type of the chosen exercise as a string

@@ -84,13 +84,13 @@ public class ExercisePresenter implements ActionListener {
 
     private Image getImage() throws IOException {
         Image screenImage = null;
-        if (this.exercise.getType() == DEFAULT_EX_TYPE_1) {
+        if (this.exercise.getType().equals(DEFAULT_EX_TYPE_1)) {
             screenImage = ImageIO.read(new File(IMAGEFILEPATH + "Act.jpg"));
-        } else if (this.exercise.getType() == DEFAULT_EX_TYPE_2) {
+        } else if (this.exercise.getType().equals(DEFAULT_EX_TYPE_2)) {
             screenImage = ImageIO.read(new File(IMAGEFILEPATH + "Breathe.jpg"));
-        } else if (this.exercise.getType() == DEFAULT_EX_TYPE_3) {
+        } else if (this.exercise.getType().equals(DEFAULT_EX_TYPE_3)) {
             screenImage = ImageIO.read(new File(IMAGEFILEPATH + "Notice.jpg"));
-        } else if (this.exercise.getType() == DEFAULT_EX_TYPE_4) {
+        } else if (this.exercise.getType().equals(DEFAULT_EX_TYPE_4)) {
             screenImage = ImageIO.read(new File(IMAGEFILEPATH + "Relax.jpg"));
         }
         return screenImage;

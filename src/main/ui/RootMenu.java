@@ -3,13 +3,18 @@ package ui;
 
 import exceptions.InvalidActionSelection;
 import model.ExerciseList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Root Menu and base JFrame for graphical user interface for the Mission Mindful app.
@@ -29,10 +34,15 @@ public class RootMenu extends JFrame implements ActionListener {
     protected JButton loadButton;
     private List<JButton> rootMenuButtons;
     ExerciseList exerciseList;
+    private static final String JSON_STORE = "./data/exerciseList.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // Constructor for brand new App called from Main
     public RootMenu(ExerciseList exerciseList) {
         this.exerciseList = exerciseList;
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         initializeBaseFrame();
         initializeInteraction();
     }
@@ -41,6 +51,8 @@ public class RootMenu extends JFrame implements ActionListener {
     public RootMenu(JFrame frame, ExerciseList exerciseList) {
         this.frame = frame;
         this.exerciseList = exerciseList;
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         initializeGraphics();
         initializeInteraction();
     }
@@ -118,9 +130,9 @@ public class RootMenu extends JFrame implements ActionListener {
         } else if (e.getSource() == addButton) {
             displayExerciseMenu(ADD);
         } else if (e.getSource() == saveButton) {
-            System.out.println("!!! Jeremy to add save functionality");
+            saveExerciseList();
         } else if (e.getSource() == loadButton) {
-            System.out.println("!!! Jeremy to add load functionality");
+            loadExerciseList();
         }
     }
 
@@ -132,6 +144,33 @@ public class RootMenu extends JFrame implements ActionListener {
             new ExerciseMenu(this.frame, exerciseList, menuPurpose);
         } catch (InvalidActionSelection invalidActionSelection) {
             invalidActionSelection.printStackTrace();
+        }
+    }
+
+    // EFFECTS: saves the exerciseList (mindfulness program) to file
+    private void saveExerciseList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(exerciseList);
+            jsonWriter.close();
+            System.out.println("Saved current mindfulness program to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads exerciseList (mindfulness program) from file
+    private void loadExerciseList() {
+        try {
+            //ExerciseList loadedExerciseList;
+            this.exerciseList = jsonReader.read();
+            removeButtonsFromRootMenu();
+            new RootMenu(frame, exerciseList);
+            System.out.println("Loaded current mindfulness program from  " + JSON_STORE);
+
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }
