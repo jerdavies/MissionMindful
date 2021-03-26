@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.EmptyFieldsException;
 import exceptions.InvalidActionSelection;
 import model.Exercise;
 import model.ExerciseList;
@@ -178,20 +179,28 @@ public class ExerciseMenu implements ActionListener {
             if (menuPurpose == RootMenu.CHOOSE) {
                 chooseNextExercise(type);
             } else if (!type.equals("")) {
-                addCustomExercise(type);
+                try {
+                    addCustomExercise(type);
+                } catch (EmptyFieldsException emptyFieldsException) {
+                    southTextLabel.setText("Add operation cancelled. No exercise added");
+                }
             }
         }
     }
 
     // MODIFIES: this
-    // EFFECTS: allows user to type in a desription and adds the exercise to exerciseList, plus prints add confirmation
-    private void addCustomExercise(String type) {
+    // EFFECTS: allows user to type in a description and adds the exercise to exerciseList, plus prints add confirmation
+    private void addCustomExercise(String type) throws EmptyFieldsException {
         String s = (String)JOptionPane.showInputDialog(frame, "Enter an exercise description:\n",
                 "Add New " + type + " Exercise", JOptionPane.PLAIN_MESSAGE,
                 null, null, "Type here");
 
-        exerciseList.addExercise(type, s, false);
-        southTextLabel.setText(type + " exercise was successfully added!");
+        if (s == null || (s != null && ("".equals(s)))) {
+            throw new EmptyFieldsException();
+        } else {
+            exerciseList.addExercise(type, s, false);
+            southTextLabel.setText(type + " exercise was successfully added!");
+        }
     }
 
     // EFFECTS: returns the type of the chosen exercise as a string
