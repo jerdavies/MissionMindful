@@ -12,7 +12,7 @@
     {
         "description": "De-clutter part of your house or office desk, helping the mind to feel calmer and clearer",
         "type": "Act",
-        "isComplete": true
+        "isComplete": false
     },
     {
         "description": "Take 20 deep breaths; inhale through nose, exhale with mouth",
@@ -32,7 +32,7 @@
     {
         "description": "Walk for 10 minutes today, without your phone, focused on your surroundings",
         "type": "Notice",
-        "isComplete": false
+        "isComplete": true
     },
     {
         "description": "Notice the sensation as you change posture today from sitting to standing or standing to sitting",
@@ -52,31 +52,16 @@
     {
         "description": "Drink a mindful cup of tea or coffee",
         "type": "Relax",
-        "isComplete": true
+        "isComplete": false
     },
     {
         "description": "Pick up a good book and read it while lounging in a comfortable spot",
         "type": "Relax",
-        "isComplete": true
+        "isComplete": false
     },
     {
-        "description": "testAct",
-        "type": "Act",
-        "isComplete": true
-    },
-    {
-        "description": "Hello Relax",
-        "type": "Relax",
-        "isComplete": true
-    },
-    {
-        "description": "test Act description",
-        "type": "Act",
-        "isComplete": true
-    },
-    {
-        "description": "Chillll",
-        "type": "Relax",
+        "description": "Legit breathe exercise",
+        "type": "Breathe",
         "isComplete": true
     }
 ]}

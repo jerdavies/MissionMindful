@@ -14,7 +14,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Root Menu and base JFrame for graphical user interface for the Mission Mindful app.
@@ -27,11 +26,15 @@ public class RootMenu extends JFrame implements ActionListener {
     public static final String ADD = "add";
 
     private JFrame frame;
+    private JPanel northPane;
+    private JPanel centrePane;
+    private JPanel southPane;
     protected JButton chooseButton;
     protected JButton viewButton;
     protected JButton addButton;
     protected JButton saveButton;
     protected JButton loadButton;
+    private JLabel southTextLabel;
     private List<JButton> rootMenuButtons;
     ExerciseList exerciseList;
     private static final String JSON_STORE = "./data/exerciseList.json";
@@ -70,8 +73,15 @@ public class RootMenu extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS:  sets the frame layout and adds the root menu buttons
     private void initializeGraphics() {
-        frame.setLayout(new GridLayout(5,1));
-        addButtonsToMenu();
+        frame.setLayout(new BorderLayout());
+
+        configureNorthPane();
+        frame.add(northPane, BorderLayout.NORTH);
+        configureCentrePane();
+        frame.add(centrePane, BorderLayout.CENTER);
+        configureSouthPane();
+        frame.add(southPane, BorderLayout.SOUTH);
+
         frame.setVisible(true);
     }
 
@@ -81,6 +91,33 @@ public class RootMenu extends JFrame implements ActionListener {
         for (JButton b : rootMenuButtons) {
             b.addActionListener(this);
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Creates JPanel located in NORTH position
+    private void configureNorthPane() {
+        northPane = new JPanel();
+        northPane.add(createNorthTextLabel(), BorderLayout.NORTH);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Creates JPanel located in CENTER position
+    private void configureCentrePane() {
+        centrePane = new JPanel();
+        centrePane.setLayout(new GridLayout(5,1));
+        addButtonsToMenu();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Creates JPanel located in SOUTH position
+    private void configureSouthPane() {
+        southPane = new JPanel();
+        southTextLabel = new JLabel();
+
+        southTextLabel.setText("");
+        southTextLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
+        southTextLabel.setHorizontalAlignment(JTextField.CENTER);
+        southPane.add(southTextLabel);
     }
 
     // MODIFIES: this
@@ -96,16 +133,27 @@ public class RootMenu extends JFrame implements ActionListener {
 
         for (JButton b : rootMenuButtons) {
             b.setFont(new Font("Dialog", Font.BOLD, 20));
-            frame.add(b);
+            centrePane.add(b);
         }
     }
 
+    // EFFECTS: returns the customized JLabel with the text to display at the top of the menu
+    private JLabel createNorthTextLabel() {
+        JLabel northTextLabel = new JLabel();
+
+        northTextLabel.setText("Welcome! Select from the menu below:");
+        northTextLabel.setFont(new Font("Dialog", Font.ITALIC, 20));
+        northTextLabel.setHorizontalAlignment(JTextField.CENTER);
+
+        return northTextLabel;
+    }
+
     // MODIFIES: this
-    // EFFECTS:  Remove root menu buttons from the frame
-    public void removeButtonsFromRootMenu() {
-        for (JButton b : rootMenuButtons) {
-            frame.remove(b);
-        }
+    // EFFECTS:  Remove 3 panes from the frame
+    public void removePanesFromRootMenu() {
+        frame.remove(northPane);
+        frame.remove(centrePane);
+        frame.remove(southPane);
     }
 
     // MODIFIES: this
@@ -125,7 +173,7 @@ public class RootMenu extends JFrame implements ActionListener {
         if (e.getSource() == chooseButton) {
             displayExerciseMenu(CHOOSE);
         } else if (e.getSource() == viewButton) {
-            removeButtonsFromRootMenu();
+            removePanesFromRootMenu();
             new CompletedExerciseList(frame, exerciseList);
         } else if (e.getSource() == addButton) {
             displayExerciseMenu(ADD);
@@ -139,7 +187,7 @@ public class RootMenu extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: create new exercise type menu so user can choose which exercise type to do
     private void displayExerciseMenu(String menuPurpose) {
-        removeButtonsFromRootMenu();
+        removePanesFromRootMenu();
         try {
             new ExerciseMenu(this.frame, exerciseList, menuPurpose);
         } catch (InvalidActionSelection invalidActionSelection) {
@@ -153,7 +201,7 @@ public class RootMenu extends JFrame implements ActionListener {
             jsonWriter.open();
             jsonWriter.write(exerciseList);
             jsonWriter.close();
-            System.out.println("Saved current mindfulness program to " + JSON_STORE);
+            southTextLabel.setText("Saved current mindfulness program to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -163,11 +211,9 @@ public class RootMenu extends JFrame implements ActionListener {
     // EFFECTS: loads exerciseList (mindfulness program) from file
     private void loadExerciseList() {
         try {
-            //ExerciseList loadedExerciseList;
             this.exerciseList = jsonReader.read();
-            removeButtonsFromRootMenu();
-            new RootMenu(frame, exerciseList);
-            System.out.println("Loaded current mindfulness program from  " + JSON_STORE);
+            southTextLabel.setText("Loaded current mindfulness program from " + JSON_STORE);
+            System.out.println("Loaded current mindfulness program from " + JSON_STORE);
 
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
