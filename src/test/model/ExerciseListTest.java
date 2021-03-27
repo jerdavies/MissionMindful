@@ -110,4 +110,43 @@ class ExerciseListTest {
 
         assertEquals(expected, result);
     }
+
+    @Test
+    void testGetCompletedExerciseArrayEmpty() {
+        String[][] array = this.exerciseList.getCompletedExerciseArray();
+
+        assertEquals(0, array.length);
+    }
+
+    @Test
+    void testGetCompletedExerciseArrayOneComplete() {
+        exercise = exerciseList.getNextExercise(DEFAULT_EX_TYPE_3);
+        exercise.markExerciseComplete();
+
+        String[][] array = this.exerciseList.getCompletedExerciseArray();
+
+        assertEquals(1, array.length);
+        assertEquals(DEFAULT_EX_TYPE_3, array[0][0]);
+        assertEquals(DEFAULT_EXERCISE_7, array[0][1]);
+    }
+
+    @Test
+    void testGetCompletedExerciseArrayManyComplete() {
+        exercise = exerciseList.getNextExercise(DEFAULT_EX_TYPE_3);
+        exercise.markExerciseComplete();
+        exercise = exerciseList.getNextExercise(DEFAULT_EX_TYPE_3);
+        exercise.markExerciseComplete();
+        exercise = exerciseList.getNextExercise(DEFAULT_EX_TYPE_4);
+        exercise.markExerciseComplete();
+
+        String[][] array = this.exerciseList.getCompletedExerciseArray();
+
+        assertEquals(3, array.length);
+        assertEquals(DEFAULT_EX_TYPE_3, array[0][0]);
+        assertEquals(DEFAULT_EXERCISE_7, array[0][1]);
+        assertEquals(DEFAULT_EX_TYPE_3, array[1][0]);
+        assertEquals(DEFAULT_EXERCISE_8, array[1][1]);
+        assertEquals(DEFAULT_EX_TYPE_4, array[2][0]);
+        assertEquals(DEFAULT_EXERCISE_10, array[2][1]);
+    }
 }
