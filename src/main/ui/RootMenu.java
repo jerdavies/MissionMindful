@@ -1,7 +1,7 @@
 package ui;
 
 
-import exceptions.InvalidActionSelection;
+import ui.exceptions.InvalidActionSelection;
 import model.ExerciseList;
 import persistence.JsonReader;
 import persistence.JsonWriter;

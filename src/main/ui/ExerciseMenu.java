@@ -1,7 +1,7 @@
 package ui;
 
-import exceptions.EmptyFieldsException;
-import exceptions.InvalidActionSelection;
+import ui.exceptions.EmptyFieldsException;
+import ui.exceptions.InvalidActionSelection;
 import model.Exercise;
 import model.ExerciseList;
 
