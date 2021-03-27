@@ -117,6 +117,7 @@ public class ExerciseMenu implements ActionListener {
         return northText;
     }
 
+    // MODIFIES: this
     // EFFECTS: returns the customized JLabel with the text to display at the bottom of the exercise menu
     private JLabel createSouthTextLabel() {
         southTextLabel = new JLabel();

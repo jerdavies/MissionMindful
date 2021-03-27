@@ -64,6 +64,8 @@ public class ExercisePresenter implements ActionListener {
         frame.setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: builds and displays top pane
     private void configureTopPane() throws IOException {
         topPane = new JPanel();
         topPane.setLayout(new BorderLayout());
@@ -74,6 +76,8 @@ public class ExercisePresenter implements ActionListener {
         topPane.add(picture, BorderLayout.CENTER);
     }
 
+    // MODIFIES: this
+    // EFFECTS: renders type as header name and associated exercise type picture
     private void customizeExerciseVisualOutput() throws IOException {
         Image screenImage = null;
         screenImage = getImage();
@@ -82,6 +86,7 @@ public class ExercisePresenter implements ActionListener {
         customizeDescriptionText();
     }
 
+    // EFFECTS: returns the image associated with the selected type
     private Image getImage() throws IOException {
         Image screenImage = null;
         if (this.exercise.getType().equals(DEFAULT_EX_TYPE_1)) {
@@ -96,6 +101,8 @@ public class ExercisePresenter implements ActionListener {
         return screenImage;
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets picture header text
     private void customizeDescriptionText() {
         this.exerciseTypeText = new JLabel();
         exerciseTypeText.setText(exercise.getType());
@@ -103,6 +110,8 @@ public class ExercisePresenter implements ActionListener {
         exerciseTypeText.setHorizontalAlignment(JTextField.CENTER);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up and displays bottom pane
     private void configureBottomPane() {
         bottomPane = new JPanel();
         this.exerciseDescriptionText = new JLabel();
@@ -118,6 +127,8 @@ public class ExercisePresenter implements ActionListener {
         bottomPane.add(southBottomPane);
     }
 
+    // MODIFIES: this
+    // EFFECTS: renders and formats exercise description text
     private void formatExerciseDescriptionText() {
         exerciseDescriptionText.setText(exercise.getDescription());
         exerciseDescriptionText.setFont(new Font("SansSerif", Font.ITALIC, 26));
@@ -154,6 +165,7 @@ public class ExercisePresenter implements ActionListener {
         exercisePresenterButtons.add(this.doNotMarkCompleteButton);
     }
 
+    // MODIFIES: this
     // EFFECTS: Handles buttonEvent and brings user to next screen based on button clicked
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -168,6 +180,8 @@ public class ExercisePresenter implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: remove panes from this.frame
     private void removePanes() {
         frame.remove(topPane);
         frame.remove(bottomPane);
