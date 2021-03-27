@@ -78,7 +78,13 @@ public class CompletedExerciseList implements ActionListener {
         String[][] data = exerciseList.getCompletedExerciseArray();
         JTable table;
         table = new JTable(data, columnNames);
-        table.setPreferredScrollableViewportSize(new Dimension(700, 500));
+        table.getColumnModel().getColumn(1).setPreferredWidth(550);
+        table.setFont(new Font("Arial", Font.PLAIN, 16));
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 16));
+        table.getTableHeader().setBackground(new Color(32, 136, 203));
+        table.getTableHeader().setForeground(new Color(255, 255, 255));
+        table.setPreferredScrollableViewportSize(new Dimension(800, 500));
+        table.setRowHeight(40);
         table.setFillsViewportHeight(true);
         return table;
     }
