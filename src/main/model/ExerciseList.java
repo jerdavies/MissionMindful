@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,6 +25,9 @@ public class ExerciseList implements Writable {
     public static final String DEFAULT_EX_TYPE_2 = "Breathe";
     public static final String DEFAULT_EX_TYPE_3 = "Notice";
     public static final String DEFAULT_EX_TYPE_4 = "Relax";
+    public static final List<String> DEFAULT_EX_TYPES = Arrays.asList(new String[]{DEFAULT_EX_TYPE_1, DEFAULT_EX_TYPE_2,
+            DEFAULT_EX_TYPE_3, DEFAULT_EX_TYPE_4});
+
 
     public static final String DEFAULT_EXERCISE_1 = "Write down 3 things you appreciate from today";
     public static final String DEFAULT_EXERCISE_2 = "Get some exercise, without your phone, and focus on the"
@@ -166,13 +170,15 @@ public class ExerciseList implements Writable {
         return jsonArray;
     }
 
-    // EFFECTS: returns list of only completed exercises
+    // EFFECTS: returns list of only completed exercises, sorted by exercise type
     public ArrayList<Exercise> getCompletedExerciseList() {
         ArrayList<Exercise> completedExerciseList = new ArrayList<Exercise>();
 
-        for (Exercise e : exerciseList) {
-            if (e.getCompletionStatus() == true) {
-                completedExerciseList.add(e);
+        for (String type : DEFAULT_EX_TYPES) {
+            for (Exercise e : exerciseList) {
+                if (e.getCompletionStatus() == true && e.getType().equals(type)) {
+                    completedExerciseList.add(e);
+                }
             }
         }
         return completedExerciseList;
