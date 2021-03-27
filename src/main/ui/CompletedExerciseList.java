@@ -47,6 +47,9 @@ public class CompletedExerciseList implements ActionListener {
         frame.setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates pane in North border position and
+    // adds text indicating that the list of completed exercises is below
     private void configureNorthPane() {
         northPane = new JPanel();
         northTextLabel = new JLabel();
@@ -57,25 +60,32 @@ public class CompletedExerciseList implements ActionListener {
         northPane.add(northTextLabel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates pane in Center layout position and
+    // adds table of completed exercises
     private void configureCenterpane() {
         centerPane = new JPanel();
 
-        String[] columnNames = {"Type", "Description"};
+        JTable table = createjTable();
 
+        JScrollPane scrollPane = new JScrollPane(table);
+        centerPane.add(scrollPane);
+    }
+
+    // EFFECTS: creates table of completed exercises list
+    private JTable createjTable() {
+        String[] columnNames = {"Type", "Description"};
         String[][] data = exerciseList.getCompletedExerciseArray();
         JTable table;
         table = new JTable(data, columnNames);
         table.setPreferredScrollableViewportSize(new Dimension(700, 500));
         table.setFillsViewportHeight(true);
-
-
-        JScrollPane scrollPane = new JScrollPane(table);
-
-//        scrollpane.add("TEST", null);
-
-        centerPane.add(scrollPane);
+        return table;
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates pane in South border position and
+    // adds button to return to Main (Root) Menu
     private void configureSouthPane() {
         southPane = new JPanel();
         mainMenuButton = new JButton("Return to main menu");
@@ -91,6 +101,7 @@ public class CompletedExerciseList implements ActionListener {
     }
 
 
+    // MODIFIES: this
     // EFFECTS: Handles buttonEvent and brings user to next screen based on button clicked
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -100,6 +111,8 @@ public class CompletedExerciseList implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes north, center, south panes from this.frame
     private void removePanes() {
         frame.remove(northPane);
         frame.remove(centerPane);

@@ -27,7 +27,7 @@
     {
         "description": "Follow along with a guided meditation on Youtube",
         "type": "Breathe",
-        "isComplete": false
+        "isComplete": true
     },
     {
         "description": "Walk for 10 minutes today, without your phone, focused on your surroundings",
