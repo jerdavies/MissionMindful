@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.InvalidTypeException;
 import ui.exceptions.EmptyFieldsException;
 import ui.exceptions.InvalidActionSelection;
 import model.Exercise;
@@ -199,7 +200,11 @@ public class ExerciseMenu implements ActionListener {
         if (s == null || (s != null && ("".equals(s)))) {
             throw new EmptyFieldsException();
         } else {
-            exerciseList.addExercise(type, s, false);
+            try {
+                exerciseList.addExercise(type, s, false);
+            } catch (InvalidTypeException e) {
+                System.out.println("Not a valid exercise type. Please enter a valid exercise type.");
+            }
             southTextLabel.setText(type + " exercise was successfully added!");
         }
     }
@@ -237,13 +242,16 @@ public class ExerciseMenu implements ActionListener {
     public void presentExerciseToUser(String type) throws InvalidActionSelection {
         Exercise exercise;
 
-        exercise = this.exerciseList.getNextExercise(type);
-
-        if (exercise == null) {
-            displayNoExercisesDialog(type);
-            new ExerciseMenu(frame, exerciseList, RootMenu.CHOOSE);
-        } else {
-            new ExercisePresenter(this.frame, exercise, this.exerciseList);
+        try {
+            exercise = this.exerciseList.getNextExercise(type);
+            if (exercise == null) {
+                displayNoExercisesDialog(type);
+                new ExerciseMenu(frame, exerciseList, RootMenu.CHOOSE);
+            } else {
+                new ExercisePresenter(this.frame, exercise, this.exerciseList);
+            }
+        } catch (InvalidTypeException e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.InvalidTypeException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -64,25 +65,34 @@ public class ExerciseList implements Writable {
     // MODIFIES: this
     // EFFECTS: adds default program exercises to this
     public void addDefaultExercises() {
-        addExercise(DEFAULT_EX_TYPE_1, DEFAULT_EXERCISE_1, false);
-        addExercise(DEFAULT_EX_TYPE_1, DEFAULT_EXERCISE_2, false);
-        addExercise(DEFAULT_EX_TYPE_1, DEFAULT_EXERCISE_3, false);
-        addExercise(DEFAULT_EX_TYPE_2, DEFAULT_EXERCISE_4, false);
-        addExercise(DEFAULT_EX_TYPE_2, DEFAULT_EXERCISE_5, false);
-        addExercise(DEFAULT_EX_TYPE_2, DEFAULT_EXERCISE_6, false);
-        addExercise(DEFAULT_EX_TYPE_3, DEFAULT_EXERCISE_7, false);
-        addExercise(DEFAULT_EX_TYPE_3, DEFAULT_EXERCISE_8, false);
-        addExercise(DEFAULT_EX_TYPE_3, DEFAULT_EXERCISE_9, false);
-        addExercise(DEFAULT_EX_TYPE_4, DEFAULT_EXERCISE_10, false);
-        addExercise(DEFAULT_EX_TYPE_4, DEFAULT_EXERCISE_11, false);
-        addExercise(DEFAULT_EX_TYPE_4, DEFAULT_EXERCISE_12, false);
+        try {
+            addExercise(DEFAULT_EX_TYPE_1, DEFAULT_EXERCISE_1, false);
+            addExercise(DEFAULT_EX_TYPE_1, DEFAULT_EXERCISE_2, false);
+            addExercise(DEFAULT_EX_TYPE_1, DEFAULT_EXERCISE_3, false);
+            addExercise(DEFAULT_EX_TYPE_2, DEFAULT_EXERCISE_4, false);
+            addExercise(DEFAULT_EX_TYPE_2, DEFAULT_EXERCISE_5, false);
+            addExercise(DEFAULT_EX_TYPE_2, DEFAULT_EXERCISE_6, false);
+            addExercise(DEFAULT_EX_TYPE_3, DEFAULT_EXERCISE_7, false);
+            addExercise(DEFAULT_EX_TYPE_3, DEFAULT_EXERCISE_8, false);
+            addExercise(DEFAULT_EX_TYPE_3, DEFAULT_EXERCISE_9, false);
+            addExercise(DEFAULT_EX_TYPE_4, DEFAULT_EXERCISE_10, false);
+            addExercise(DEFAULT_EX_TYPE_4, DEFAULT_EXERCISE_11, false);
+            addExercise(DEFAULT_EX_TYPE_4, DEFAULT_EXERCISE_12, false);
+        } catch (InvalidTypeException e) {
+            System.out.println("Not a valid exercise type. Please enter a valid exercise type.");
+        }
     }
 
-    // REQUIRES: exerciseType is one of: DEFAULT_EX_TYPE_1, DEFAULT_EX_TYPE_2, DEFAULT_EX_TYPE_3, DEFAULT_EX_TYPE_4
     // MODIFIES: this
     // EFFECTS: adds a new exercise of the specified type to the collection of exercises
-    public void addExercise(String exerciseType, String exerciseDescription, Boolean isComplete) {
+    public void addExercise(String exerciseType, String exerciseDescription, Boolean isComplete)
+            throws InvalidTypeException {
+        if (!DEFAULT_EX_TYPES.contains(exerciseType)) {
+            throw new InvalidTypeException();
+        }
+
         Exercise exercise;
+
         if (exerciseType.equals(DEFAULT_EX_TYPE_1)) {
             exercise = new Act(exerciseType, exerciseDescription, isComplete);
         } else if (exerciseType.equals(DEFAULT_EX_TYPE_2)) {
@@ -95,9 +105,12 @@ public class ExerciseList implements Writable {
         this.exerciseList.add(exercise);
     }
 
-    // REQUIRES: exerciseType is one of: DEFAULT_EX_TYPE_1, DEFAULT_EX_TYPE_2, DEFAULT_EX_TYPE_3, DEFAULT_EX_TYPE_4
     // EFFECTS: returns the first non-completed exercise of the specified type or null object if no more to do
-    public Exercise getNextExercise(String type) {
+    public Exercise getNextExercise(String type) throws InvalidTypeException {
+        if (!DEFAULT_EX_TYPES.contains(type)) {
+            throw new InvalidTypeException();
+        }
+
         for (Exercise e: this.exerciseList) {
             if (!(e.getCompletionStatus()) && e.getType().equals(type)) {
                 return e;

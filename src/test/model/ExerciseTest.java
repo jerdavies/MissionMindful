@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.InvalidTypeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -39,9 +40,13 @@ class ExerciseTest {
 
     @Test
     void testMarkExerciseComplete() {
-        this.exercise = this.exerciseList.getNextExercise(DEFAULT_EX_TYPE_2);
-        assertFalse(exercise.getCompletionStatus());
-        this.exercise.markExerciseComplete();
-        assertTrue(exercise.getCompletionStatus());
+        try {
+            this.exercise = this.exerciseList.getNextExercise(DEFAULT_EX_TYPE_2);
+            assertFalse(exercise.getCompletionStatus());
+            this.exercise.markExerciseComplete();
+            assertTrue(exercise.getCompletionStatus());
+        } catch (InvalidTypeException e) {
+            e.printStackTrace();
+        }
     }
 }

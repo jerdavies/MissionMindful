@@ -12,6 +12,10 @@ import java.util.ArrayList;
 
 import java.awt.event.ActionListener;
 
+/**
+ * User interface for viewing completed exercises in a scrollable table
+ */
+
 public class CompletedExerciseList implements ActionListener {
     private JFrame frame;
     private JPanel northPane;

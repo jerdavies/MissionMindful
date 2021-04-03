@@ -40,3 +40,8 @@ habits.
 - As a user, I want to be able to view the exercises I have completed to track my progress
 - As a user, I want to be able to save my exercise program (including progress) to file
 - As a user, I want to be able to load my exercise program (including progress) from file
+
+### Phase 4: Task 2
+The ExerciseList class demonstrates a robust design. Specifically, this is implemented in:
+- addExercise(String exerciseType, String exerciseDescription, Boolean isComplete)
+- getNextExercise(String type)

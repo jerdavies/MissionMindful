@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.InvalidTypeException;
 import model.Exercise;
 import model.ExerciseList;
 import persistence.JsonReader;
@@ -99,7 +100,11 @@ public class MindfulnessApp {
         String exerciseDescription = input.nextLine();
         exerciseDescription = input.nextLine(); //if this is not here the input prompt will be skipped
 
-        exerciseList.addExercise(type, exerciseDescription, false);
+        try {
+            exerciseList.addExercise(type, exerciseDescription, false);
+        } catch (InvalidTypeException e) {
+            System.out.println("Not a valid exercise type. Please enter a valid exercise type.");
+        }
         System.out.println("\nExercise successfully added!");
 
         selectNextAction();
@@ -115,17 +120,20 @@ public class MindfulnessApp {
         System.out.println("\nWhich type of mindfulness exercise would you like to do?");
         type = selectExerciseType();
 
-        exercise = this.exerciseList.getNextExercise(type);
-
-        if (exercise == null) {
-            System.out.println("\nNo more " + type + " exercises left. If you wish, add a new one from the"
-                    + " main menu.");
-        } else {
-            description = exercise.getDescription();
-            System.out.println("\nHere is your mindfulness exercise. Enjoy:\n" + description);
-            markExerciseComplete(exercise);
+        try {
+            exercise = this.exerciseList.getNextExercise(type);
+            if (exercise == null) {
+                System.out.println("\nNo more " + type + " exercises left. If you wish, add a new one from the"
+                        + " main menu.");
+            } else {
+                description = exercise.getDescription();
+                System.out.println("\nHere is your mindfulness exercise. Enjoy:\n" + description);
+                markExerciseComplete(exercise);
+            }
+            selectNextAction();
+        } catch (InvalidTypeException e) {
+            System.out.println("Not a valid exercise type. Please enter a valid exercise type.");
         }
-        selectNextAction();
     }
 
     // EFFECTS: prompts user to select a mindfulness category (type)

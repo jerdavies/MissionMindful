@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.InvalidTypeException;
 import model.ExerciseList;
 
 import java.io.IOException;
@@ -62,6 +63,10 @@ public class JsonReader {
         String description = jsonObject.getString("description");
         String type = jsonObject.getString("type");
         Boolean isComplete = jsonObject.getBoolean("isComplete");
-        el.addExercise(type, description, isComplete);
+        try {
+            el.addExercise(type, description, isComplete);
+        } catch (InvalidTypeException e) {
+            System.out.println("Not a valid exercise type. Please enter a valid exercise type.");
+        }
     }
 }

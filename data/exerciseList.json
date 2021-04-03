@@ -52,16 +52,21 @@
     {
         "description": "Drink a mindful cup of tea or coffee",
         "type": "Relax",
-        "isComplete": false
+        "isComplete": true
     },
     {
         "description": "Pick up a good book and read it while lounging in a comfortable spot",
         "type": "Relax",
-        "isComplete": false
+        "isComplete": true
     },
     {
         "description": "Legit breathe exercise",
         "type": "Breathe",
         "isComplete": true
+    },
+    {
+        "description": "Breathe deeply at a rate of 6 breaths per min for 10 mins",
+        "type": "Breathe",
+        "isComplete": false
     }
 ]}

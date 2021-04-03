@@ -2,6 +2,7 @@ package persistence;
 
 import static model.ExerciseList.*;
 
+import exceptions.InvalidTypeException;
 import model.Exercise;
 import model.ExerciseList;
 import org.junit.jupiter.api.Test;
@@ -50,8 +51,8 @@ public class JsonWriterTest extends JsonTest {
 
     @Test
     void testWriterGeneralExerciseList() {
+        ExerciseList el = new ExerciseList(true);
         try {
-            ExerciseList el = new ExerciseList(true);
             el.addExercise(DEFAULT_EX_TYPE_1, ACT_DESCRIPT, true);
             el.addExercise(DEFAULT_EX_TYPE_2, BREATHE_DESCRIPT, false);
             el.addExercise(DEFAULT_EX_TYPE_3, NOTICE_DESCRIPT, true);
@@ -72,6 +73,8 @@ public class JsonWriterTest extends JsonTest {
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");
+        } catch (InvalidTypeException e) {
+            fail("Should not have been thrown");
         }
     }
 }
