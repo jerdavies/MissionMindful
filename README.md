@@ -42,6 +42,23 @@ habits.
 - As a user, I want to be able to load my exercise program (including progress) from file
 
 ### Phase 4: Task 2
-The ExerciseList class demonstrates a robust design. Specifically, this is implemented in:
+The ExerciseList class demonstrates a robust design that handles checked exceptions. 
+Specifically, this is implemented in:
 - addExercise(String exerciseType, String exerciseDescription, Boolean isComplete)
-- getNextExercise(String type)
+- getNextExercise(String type) 
+
+Note that appropriate tests are implemented for when the exceptions are expected and not expected.
+
+### Phase 4: Task 3
+The UML class design diagram for this project depicts the higher than ideal coupling present
+in the program. This is especially noticeable in the collection of GUI classes, where a lot of
+dependencies exist. 
+
+To improve the design of the program, I would:
+ - Refactor the GUI classes (RootMenu, ExerciseMenu, ExercisePresenter, CompletedExerciseList). 
+ - Specifically, I would refactor out the duplicate code bodies and methods that exist in each of the "menu" classes. 
+ 
+Due to the fact that this was my first experience in building a frame-based app in Swing, I did not know how to 
+effectively design my class structure from the beginning. In retrospect, I should:
+- Design a hierarchy of classes within the GUI classes with a generic UI frame class (parent), and the specifics of
+ each unique page implemented in subclasses.

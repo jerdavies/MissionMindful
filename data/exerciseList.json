@@ -12,7 +12,7 @@
     {
         "description": "De-clutter part of your house or office desk, helping the mind to feel calmer and clearer",
         "type": "Act",
-        "isComplete": false
+        "isComplete": true
     },
     {
         "description": "Take 20 deep breaths; inhale through nose, exhale with mouth",
@@ -22,12 +22,12 @@
     {
         "description": "Every time your phone vibrates today, pause and take one breath",
         "type": "Breathe",
-        "isComplete": true
+        "isComplete": false
     },
     {
         "description": "Follow along with a guided meditation on Youtube",
         "type": "Breathe",
-        "isComplete": true
+        "isComplete": false
     },
     {
         "description": "Walk for 10 minutes today, without your phone, focused on your surroundings",
@@ -52,21 +52,16 @@
     {
         "description": "Drink a mindful cup of tea or coffee",
         "type": "Relax",
-        "isComplete": true
+        "isComplete": false
     },
     {
         "description": "Pick up a good book and read it while lounging in a comfortable spot",
         "type": "Relax",
-        "isComplete": true
-    },
-    {
-        "description": "Legit breathe exercise",
-        "type": "Breathe",
-        "isComplete": true
-    },
-    {
-        "description": "Breathe deeply at a rate of 6 breaths per min for 10 mins",
-        "type": "Breathe",
         "isComplete": false
+    },
+    {
+        "description": "Notice when you get tense and try to blow out the stress",
+        "type": "Act",
+        "isComplete": true
     }
 ]}
