@@ -1,21 +1,20 @@
 # Mission Mindful
 *A journey to improve mindfulness and relaxation habits.*
 
-### What will the application do?
-Mission Mindful will guide the user through a program of mindfulness exercises and track the user's progress along the 
-way. The user will be able to customize their experience by selecting a mindfulness category from which they will be
-prompted with a relevant mindfulness exercise to complete. 
+### What does the application do?
+Mission Mindful guides the user through a program of mindfulness exercises and tracks the user's progress along the 
+way. The user can customize their experience by selecting a mindfulness category to be prompted with 
+a relevant mindfulness exercise to complete. 
 
-There will be **4 categories** of exercises:
+There are **4 categories** of exercises:
 - Act
 - Breathe
 - Notice
 - Relax
 
-In addition, the user can add their own exercises so they can tailor
-their mindfulness habits.
+In addition, the user can add their own exercises so that they can tailor their mindfulness habits.
 
-### Who will use this app?
+### Who should use this app?
 Anyone who is interested in improving their focus on the 'present moment' and training their brain to have healthier
 thought patterns. 
 
