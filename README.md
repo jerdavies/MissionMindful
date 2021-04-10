@@ -31,34 +31,3 @@ Personally, I often find myself losing track of my present surroundings as I wor
 sidetracked with innumerable distractions. Although I employ mindfulness techniques such as deep breathing on an ad-hoc
 basis, I would personally benefit from a structured program that I can play along with to develop regular mindfulness
 habits.
-
-### User Stories
-- As a user, I want to be able to select a mindfulness category to be prompted with an exercise to complete
-- As a user, I want to be able to mark an exercise as complete, so I can move on to the next level of exercise
-- As a user, I want to be able to add my own custom exercises, so I can tailor my unique mindfulness journey 
-[many Xs to a Y]
-- As a user, I want to be able to view the exercises I have completed to track my progress
-- As a user, I want to be able to save my exercise program (including progress) to file
-- As a user, I want to be able to load my exercise program (including progress) from file
-
-### Phase 4: Task 2
-The ExerciseList class demonstrates a robust design that handles checked exceptions. 
-Specifically, this is implemented in:
-- addExercise(String exerciseType, String exerciseDescription, Boolean isComplete)
-- getNextExercise(String type) 
-
-Note that appropriate tests are implemented for when the exceptions are expected and not expected.
-
-### Phase 4: Task 3
-The UML class design diagram for this project depicts the higher than ideal coupling present
-in the program. This is especially noticeable in the collection of GUI classes, where a lot of
-dependencies exist. 
-
-To improve the design of the program, I would:
- - Refactor the GUI classes (RootMenu, ExerciseMenu, ExercisePresenter, CompletedExerciseList). 
- - Specifically, I would refactor out the duplicate code bodies and methods that exist in each of the "menu" classes. 
- 
-Due to the fact that this was my first experience in building a frame-based app in Swing, I did not know how to 
-effectively design my class structure from the beginning. In retrospect, I should:
-- Design a hierarchy of classes within the GUI classes with a generic UI frame class (parent), and the specifics of
- each unique page implemented in subclasses.
